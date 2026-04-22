@@ -23,10 +23,10 @@ html{scroll-behavior:smooth;}
 body{background:var(--bg-main);color:var(--text-main);font-family:'Manrope',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 a{text-decoration:none;color:inherit;}
 img{display:block;max-width:100%;}
- 
+
 /* ── CONTAINER ── */
 .container{max-width:1200px;margin:0 auto;padding:0 1.5rem;}
- 
+
 /* ── NAV ── */
 nav{
   position:fixed;top:0;left:0;width:100%;z-index:50;
@@ -104,21 +104,21 @@ nav.scrolled{box-shadow:0 2px 12px rgba(0,0,0,.08);}
   .nav-logo{border-right:none;padding:0 1.5rem;}
   .nav-inner{min-height:70px;}
 }
- 
+
 /* ── BUTTONS ── */
 .btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:linear-gradient(90deg,var(--accent),var(--accent-sec));color:#fff;font-weight:800;padding:1rem 2.5rem;border-radius:1rem;box-shadow:var(--shadow-accent);transition:all .3s;cursor:pointer;border:none;font-family:'Manrope',sans-serif;font-size:1rem;}
 .btn-primary:hover{transform:scale(1.05);}
 .btn-secondary{display:inline-flex;align-items:center;justify-content:center;border:2px solid var(--accent);color:var(--accent);font-weight:800;padding:1rem 2.5rem;border-radius:1rem;transition:all .3s;cursor:pointer;}
 .btn-secondary:hover{background:rgba(72,17,115,.05);}
- 
+
 /* ── GLASS CARD ── */
 .glass-card{background:#fff;border:1px solid rgba(0,0,0,.05);border-radius:1.5rem;box-shadow:0 1px 3px rgba(0,0,0,.05);transition:all .3s;}
 .glass-card:hover{box-shadow:0 20px 40px rgba(0,0,0,.1);border-color:rgba(72,17,115,.1);transform:translateY(-6px);}
- 
+
 /* ── SECTION GLOW ── */
 .section-glow{position:relative;overflow:hidden;}
 .section-glow::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:800px;background:rgba(203,17,171,.05);filter:blur(150px);border-radius:50%;z-index:0;pointer-events:none;}
- 
+
 /* ════════════════════════════════
    HERO
 ════════════════════════════════ */
@@ -134,16 +134,13 @@ nav.scrolled{box-shadow:0 2px 12px rgba(0,0,0,.08);}
 .hero-check span{font-size:1rem;font-weight:400;color:var(--text-main);}
 .hero-cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:1.5rem;}
 .hero-note{font-size:.75rem;color:var(--text-sec);max-width:12rem;line-height:1.5;}
- 
-/* --- ИСПРАВЛЕНИЕ ЗДЕСЬ --- */
-/* Analytics card */
-.analytics-wrap{
-  position:relative;
-  margin-top:2.5rem;
-  max-width:400px; /* Ограничиваем ширину, чтобы выглядело аккуратно */
-}
-/* Я убрал правило, которое сдвигало карточку вправо на больших экранах. Теперь она всегда в потоке документа */
 
+/* Analytics card */
+.analytics-wrap{position:relative;margin-top:2.5rem;}
+@media(min-width:1100px){
+  .analytics-wrap{position:absolute;left:calc(100% + 2rem);bottom:0;width:400px;margin-top:0;}
+  .hero-col{position:relative;}
+}
 .analytics-card{padding:2rem;position:relative;overflow:hidden;background:#fff;}
 .analytics-dots{display:flex;gap:.375rem;margin-bottom:2rem;}
 .analytics-dots span{width:.5rem;height:.5rem;border-radius:50%;}
@@ -167,7 +164,7 @@ nav.scrolled{box-shadow:0 2px 12px rgba(0,0,0,.08);}
 @keyframes floatUp{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
 @keyframes floatDown{0%,100%{transform:translateY(0);}50%{transform:translateY(10px);}}
 .analytics-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:120%;height:120%;background:rgba(72,17,115,.05);filter:blur(100px);border-radius:50%;z-index:-1;}
- 
+
 /* ════════════════════════════════
    PAIN POINTS
 ════════════════════════════════ */
@@ -181,7 +178,7 @@ nav.scrolled{box-shadow:0 2px 12px rgba(0,0,0,.08);}
 .pain-card p{color:var(--text-sec);font-size:.875rem;line-height:1.7;}
 .pain-bottom{text-align:center;margin-top:4rem;font-size:1.25rem;font-weight:500;color:rgba(36,36,36,.8);}
 .pain-bottom .u{color:var(--accent);text-decoration:underline;text-decoration-color:rgba(72,17,115,.3);text-underline-offset:.5rem;}
- 
+
 /* ════════════════════════════════
    SOLUTION
 ════════════════════════════════ */
@@ -191,13 +188,12 @@ nav.scrolled{box-shadow:0 2px 12px rgba(0,0,0,.08);}
 .quote-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:.3;}
 .quote-card p{font-size:1.25rem;font-weight:500;line-height:1.7;max-width:46rem;margin:0 auto;color:var(--text-main);}
 .quote-card .acc{color:var(--accent);font-weight:700;}
-.sol-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;}
 .sol-item{text-align:center;}
 .sol-icon{width:3.5rem;height:3.5rem;border-radius:1rem;background:rgba(72,17,115,.05);border:1px solid rgba(72,17,115,.1);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;color:var(--accent);}
 .sol-icon svg{width:1.5rem;height:1.5rem;}
 .sol-item h3{font-size:1.0625rem;font-weight:700;margin-bottom:.75rem;}
 .sol-item p{color:var(--text-sec);font-size:.875rem;line-height:1.6;}
- 
+
 /* ════════════════════════════════
    INCLUDED
 ════════════════════════════════ */
@@ -217,7 +213,7 @@ nav.scrolled{box-shadow:0 2px 12px rgba(0,0,0,.08);}
 .transparency-card p{color:var(--text-sec);line-height:1.7;margin-bottom:1.5rem;}
 .transparency-card .trust-badge{display:flex;align-items:center;gap:.5rem;color:var(--accent-sec);font-size:.875rem;font-weight:700;}
 .transparency-card .trust-badge svg{width:1.25rem;height:1.25rem;}
- 
+
 /* ════════════════════════════════
    PROCESS
 ════════════════════════════════ */
@@ -242,7 +238,7 @@ nav.scrolled{box-shadow:0 2px 12px rgba(0,0,0,.08);}
   .tl-card,.tl-item:nth-child(odd) .tl-card,.tl-item:nth-child(even) .tl-card{width:100%;padding:1.5rem;}
   .tl-dot{display:none;}
 }
- 
+
 /* ════════════════════════════════
    CASES
 ════════════════════════════════ */
@@ -272,7 +268,7 @@ nav.scrolled{box-shadow:0 2px 12px rgba(0,0,0,.08);}
 .scroll-progress{height:100%;background:var(--accent);border-radius:9999px;animation:scrollBar 3s linear infinite;}
 @keyframes scrollBar{from{transform:translateX(-100%);}to{transform:translateX(100%);}}
 .scroll-hint span{font-size:.625rem;color:var(--text-sec);text-transform:uppercase;letter-spacing:.1em;font-weight:700;}
- 
+
 /* ════════════════════════════════
    ABOUT
 ════════════════════════════════ */
@@ -294,7 +290,7 @@ nav.scrolled{box-shadow:0 2px 12px rgba(0,0,0,.08);}
 .about-tag{display:flex;align-items:center;gap:.75rem;background:var(--bg-secondary);padding:.75rem;border-radius:.75rem;border:1px solid rgba(0,0,0,.05);}
 .about-tag svg{width:1rem;height:1rem;color:var(--accent);}
 .about-tag span{font-size:.75rem;font-weight:700;color:rgba(36,36,36,.8);}
- 
+
 /* ════════════════════════════════
    PRICING — 3 COLUMNS
 ════════════════════════════════ */
@@ -381,7 +377,7 @@ nav.scrolled{box-shadow:0 2px 12px rgba(0,0,0,.08);}
 .pricing-col--featured .pc-btn{background:rgba(255,255,255,.2);color:#fff;border-color:rgba(255,255,255,.4);}
 .pricing-col--featured .pc-btn:hover{background:rgba(255,255,255,.3);}
 .pc-note{font-size:.65rem;color:rgba(255,255,255,.5);margin-top:1rem;line-height:1.5;text-align:center;}
- 
+
 /* ════════════════════════════════
    FAQ
 ════════════════════════════════ */
@@ -398,7 +394,7 @@ nav.scrolled{box-shadow:0 2px 12px rgba(0,0,0,.08);}
 .faq-body{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease;}
 .faq-body.open{max-height:500px;padding-bottom:1.5rem;}
 .faq-body p{color:var(--text-sec);line-height:1.8;white-space:pre-line;}
- 
+
 /* ════════════════════════════════
    CONTACT
 ════════════════════════════════ */
@@ -412,7 +408,7 @@ nav.scrolled{box-shadow:0 2px 12px rgba(0,0,0,.08);}
 .form-input{width:100%;background:var(--bg-secondary);border:1px solid rgba(0,0,0,.05);border-radius:1rem;padding:1rem 1.5rem;font-family:'Manrope',sans-serif;font-size:1rem;color:var(--text-main);transition:border-color .2s;outline:none;}
 .form-input:focus{border-color:var(--accent);}
 .form-note{text-align:center;font-size:.75rem;color:var(--text-sec);margin-top:1.5rem;}
- 
+
 /* ════════════════════════════════
    FOOTER
 ════════════════════════════════ */
@@ -432,23 +428,120 @@ footer{padding:3rem 0;background:var(--bg-secondary);border-top:1px solid rgba(0
 .footer-copy{font-size:.625rem;color:rgba(0,0,0,.2);text-transform:uppercase;letter-spacing:.1em;}
 .footer-policy{font-size:.625rem;color:rgba(0,0,0,.2);text-transform:uppercase;letter-spacing:.1em;transition:color .2s;}
 .footer-policy:hover{color:var(--accent);}
- 
+
+.sol-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;}
+@media(max-width:900px){.sol-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:600px){.sol-grid{grid-template-columns:1fr;}}
+
+/* ── CASE PLACEHOLDERS ── */
+.cases-placeholder-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.25rem;
+  margin-top:1rem;
+}
+@media(max-width:900px){.cases-placeholder-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:500px){.cases-placeholder-grid{grid-template-columns:1fr;}}
+.case-placeholder{
+  padding:1.75rem;
+  border:2px dashed rgba(72,17,115,.2);
+  border-radius:1.25rem;
+  background:#fff;
+  display:flex;
+  flex-direction:column;
+  gap:1.25rem;
+  transition:border-color .2s;
+}
+.case-placeholder:hover{border-color:rgba(72,17,115,.4);transform:translateY(-4px);}
+.cp-top{display:flex;justify-content:space-between;align-items:center;}
+.cp-tag{
+  font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;
+  color:rgba(72,17,115,.4);
+  background:rgba(72,17,115,.06);
+  padding:.25rem .75rem;border-radius:9999px;
+  border:1px dashed rgba(72,17,115,.2);
+}
+.cp-icon{font-size:1.5rem;opacity:.3;}
+.cp-body{display:flex;flex-direction:column;gap:.75rem;}
+.cp-result{
+  font-size:.875rem;color:rgba(36,36,36,.35);
+  font-weight:500;line-height:1.5;
+  border:1px dashed rgba(0,0,0,.1);
+  border-radius:.75rem;padding:.75rem;
+  background:rgba(0,0,0,.015);
+  font-style:italic;
+}
+.cp-proof{
+  font-size:.7rem;color:var(--accent);font-weight:700;
+  text-transform:uppercase;letter-spacing:.08em;
+  display:flex;align-items:center;gap:.4rem;
+  opacity:.5;
+}
+.cp-img-wrap{
+  display:block;
+  position:relative;
+  border-radius:.75rem;
+  overflow:hidden;
+  border:1px solid rgba(72,17,115,.15);
+  margin-bottom:.75rem;
+  text-decoration:none;
+}
+.cp-img-wrap img{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+  display:block;
+  transition:transform .3s;
+}
+.cp-img-wrap:hover img{transform:scale(1.03);}
+.cp-img-overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(72,17,115,.5);
+  color:#fff;
+  font-size:.8rem;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.4rem;
+  opacity:0;
+  transition:opacity .25s;
+}
+.cp-img-wrap:hover .cp-img-overlay{opacity:1;}
+.cp-proof::before{content:'📎';font-size:.8rem;}
+.case-real{border-color:rgba(72,17,115,.25);border-style:solid;}
+.cp-tag-real{background:rgba(72,17,115,.1);color:var(--accent);border:1px solid rgba(72,17,115,.2);border-style:solid;}
+.cp-proof-real{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-size:.75rem;color:var(--accent);font-weight:700;
+  text-decoration:none;
+  padding:.4rem .75rem;
+  background:rgba(72,17,115,.06);
+  border-radius:.5rem;
+  border:1px solid rgba(72,17,115,.15);
+  transition:background .2s;
+}
+.cp-proof-real:hover{background:rgba(72,17,115,.12);}
+.cp-proof-real::before{content:none;}
+
 /* ── FADE-IN ── */
-.fade{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
-.fade.visible{opacity:1;transform:translateY(0);}
-.fade-left{opacity:0;transform:translateX(-40px);transition:opacity .8s ease,transform .8s ease;}
-.fade-left.visible{opacity:1;transform:translateX(0);}
-.fade-right{opacity:0;transform:translateX(40px);transition:opacity .8s ease,transform .8s ease;}
-.fade-right.visible{opacity:1;transform:translateX(0);}
-.d1{transition-delay:.1s;} .d2{transition-delay:.2s;} .d3{transition-delay:.3s;}
-.d4{transition-delay:.4s;} .d5{transition-delay:.5s;}
- 
+.fade,.fade-left,.fade-right{opacity:1;transform:none;}
+.fade.animate{animation:fadeUp .7s ease both;}
+.fade-left.animate{animation:fadeLeft .8s ease both;}
+.fade-right.animate{animation:fadeRight .8s ease both;}
+.d1{animation-delay:.1s;} .d2{animation-delay:.2s;} .d3{animation-delay:.3s;}
+.d4{animation-delay:.4s;} .d5{animation-delay:.5s;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:none;}}
+@keyframes fadeLeft{from{opacity:0;transform:translateX(-40px);}to{opacity:1;transform:none;}}
+@keyframes fadeRight{from{opacity:0;transform:translateX(40px);}to{opacity:1;transform:none;}}
+
 /* SVG icons inline */
 svg{display:inline-block;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 </style>
 </head>
 <body>
- 
+
 <!-- NAV -->
 <nav id="navbar">
   <div class="nav-inner">
@@ -474,7 +567,7 @@ svg{display:inline-block;fill:none;stroke:currentColor;stroke-width:2;stroke-lin
     <a href="#contact" onclick="closeMob()" class="btn-primary" style="text-align:center;margin-top:.5rem;">Получить консультацию</a>
   </div>
 </nav>
- 
+
 <!-- HERO -->
 <section class="hero section-glow">
   <div class="container">
@@ -483,17 +576,18 @@ svg{display:inline-block;fill:none;stroke:currentColor;stroke-width:2;stroke-lin
         <svg width="12" height="12" style="fill:var(--accent-sec);stroke:none;"><polygon points="6,1 7.8,4.5 12,5.2 9,8.1 9.7,12 6,10.1 2.3,12 3,8.1 0,5.2 4.2,4.5"/></svg>
         Топ-эксперт по трафику для WB &amp; Ozon
       </div>
-      <h1>Увеличьте продажи <br><span class="acc">в 2-3 раза</span> за счет <br>системного трафика</h1>
-      <p class="hero-desc">Запускаю рекламу, которая приносит реальные заказы и выкупы. Работаем прозрачно в вашем кабинете.</p>
+      <h1>Увеличьте продажи <span class="acc">в 2-3 раза</span>. Приведу целевых покупателей на Wildberries и Ozon</h1>
+      <p class="hero-desc">Привожу покупателей, которые уже ищут ваш товар. Работаю прозрачно в вашем кабинете — вы видите каждый рубль.</p>
       <div class="hero-checks">
-        <div class="hero-check"><div class="hero-check-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2.5" stroke-width="1.5"/></svg></div><span>Гарантированный целевой трафик на карточку</span></div>
-        <div class="hero-check"><div class="hero-check-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2.5" stroke-width="1.5"/></svg></div><span>Снижение стоимости привлечения клиента (CAC)</span></div>
-        <div class="hero-check"><div class="hero-check-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2.5" stroke-width="1.5"/></svg></div><span>Полная прозрачность: вы видите каждый рубль</span></div>
+        <div class="hero-check"><div class="hero-check-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2.5" stroke-width="1.5"/></svg></div><span>Работала с десятками ниш — знаю, что продаёт и как это упаковать.</span></div>
+        <div class="hero-check"><div class="hero-check-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2.5" stroke-width="1.5"/></svg></div><span>Реклама на выкуп — настраиваю на реальные заказы, а не просто клики.</span></div>
+        <div class="hero-check"><div class="hero-check-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2.5" stroke-width="1.5"/></svg></div><span>Полная прозрачность — вы видите все объявления и статистику в вашем кабинете.</span></div>
       </div>
- 
+
       <!-- Analytics Card -->
-      <div class="analytics-wrap glass-card analytics-card fade d2">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;">
+      <div style="margin-bottom:2.5rem;max-width:480px;">
+        <div class="glass-card analytics-card fade d2">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
             <div class="analytics-dots">
               <span style="background:rgba(239,68,68,.3);"></span>
               <span style="background:rgba(234,179,8,.3);"></span>
@@ -503,34 +597,22 @@ svg{display:inline-block;fill:none;stroke:currentColor;stroke-width:2;stroke-lin
           </div>
           <div class="chart-bars" id="chartBars"></div>
           <div class="analytics-grid">
-            <div class="analytics-cell">
-              <div class="cell-label">Заказы</div>
-              <div class="cell-val green">+145% ↑</div>
-            </div>
-            <div class="analytics-cell">
-              <div class="cell-label">ROI</div>
-              <div class="cell-val purple">420%</div>
-            </div>
-            <div class="analytics-cell">
-              <div class="cell-label">Выкупы</div>
-              <div class="cell-val" style="color:var(--accent-sec);">89%</div>
-            </div>
-            <div class="analytics-cell">
-              <div class="cell-label">Цена клика</div>
-              <div class="cell-val green">от 2.5 ₽</div>
-            </div>
+            <div class="analytics-cell"><div class="cell-label">Заказы</div><div class="cell-val green">+145% ↑</div></div>
+            <div class="analytics-cell"><div class="cell-label">ROI</div><div class="cell-val purple">420%</div></div>
+            <div class="analytics-cell"><div class="cell-label">Выкупы</div><div class="cell-val" style="color:var(--accent-sec);">89%</div></div>
+            <div class="analytics-cell"><div class="cell-label">Цена клика</div><div class="cell-val green">от 2.5 ₽</div></div>
           </div>
-          <div class="analytics-glow"></div>
+        </div>
       </div>
-      
-      <div class="hero-cta-row" style="margin-top:2.5rem;">
+
+      <div class="hero-cta-row">
         <a href="#contact" class="btn-primary">Увеличить продажи сейчас <svg width="20" height="20"><line x1="5" y1="10" x2="15" y2="10"/><polyline points="11,6 15,10 11,14"/></svg></a>
         <p class="hero-note">Бесплатный аудит вашей карточки перед запуском</p>
       </div>
     </div>
   </div>
 </section>
- 
+
 <!-- PAIN POINTS -->
 <section class="pain">
   <div class="container">
@@ -547,24 +629,26 @@ svg{display:inline-block;fill:none;stroke:currentColor;stroke-width:2;stroke-lin
     <div class="pain-bottom fade">Всё это — <span class="u">решается</span>. Если реклама сделана правильно.</div>
   </div>
 </section>
- 
+
 <!-- SOLUTION -->
 <section class="solution section-glow" id="услуги">
   <div class="container">
     <h2 class="section-title fade">Мой подход — это <span style="color:var(--accent)">система</span>, а не просто клики</h2>
     <p class="solution-intro fade d1">Я запускаю рекламу так, чтобы каждый рубль рекламного бюджета шел только на целевой трафик и работал на прибыль.</p>
     <div class="glass-card quote-card fade d2">
-      <p>Прежде чем запустить первое объявление, я провожу глубокий аудит: товар, ниша, конкуренты и отзывы.<br><br><span class="acc">Реклама без стратегии — это благотворительность в пользу рекламных площадок.</span></p>
+      <p>Прежде чем запустить первое объявление, я провожу глубокий аудит: товар, ниша, конкуренты и отзывы.</p>
     </div>
     <div class="sol-grid">
       <div class="sol-item fade d1"><div class="sol-icon"><svg width="24" height="24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="3" x2="12" y2="1"/><line x1="12" y1="23" x2="12" y2="21"/><line x1="3" y1="12" x2="1" y2="12"/><line x1="23" y1="12" x2="21" y2="12"/></svg></div><h3>Точная стратегия</h3><p>Анализирую воронку продаж. Определяю, какие сегменты аудитории принесут самый дешевый заказ.</p></div>
       <div class="sol-item fade d2"><div class="sol-icon"><svg width="24" height="24"><rect x="2" y="7" width="20" height="14" rx="2"/><polyline points="16,7 12,3 8,7"/><line x1="12" y1="12" x2="12" y2="17"/><line x1="9" y1="15" x2="15" y2="15"/></svg></div><h3>А/Б Тестирование</h3><p>Запускаю десятки гипотез. Нахожу те самые макеты и тексты, которые 'цепляют' вашего покупателя.</p></div>
       <div class="sol-item fade d3"><div class="sol-icon"><svg width="24" height="24"><circle cx="8" cy="21" r="2"/><circle cx="20" cy="21" r="2"/><path d="M5.67 6H23l-1.68 8.39a2 2 0 01-2 1.61H8.75a2 2 0 01-2-1.74L5.23 2.74A2 2 0 003.25 1H1"/></svg></div><h3>Фокус на выкуп</h3><p>Цель — не просто переход, а покупка. Оптимизирую кампании под реальные продажи на маркетплейсе.</p></div>
       <div class="sol-item fade d4"><div class="sol-icon"><svg width="24" height="24"><polyline points="23,6 13.5,15.5 8.5,10.5 1,18"/><polyline points="17,6 23,6 23,12"/></svg></div><h3>Масштабирование</h3><p>Когда связка найдена — плавно увеличиваем бюджет, сохраняя стоимость заказа и окупаемость.</p></div>
+      <div class="sol-item fade d5"><div class="sol-icon"><svg width="24" height="24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/><path d="M3.6 9h.01M20.4 9h.01"/></svg></div><h3>Разные подходы к каждому сегменту ЦА</h3><p>После анализа разбиваю аудиторию на сегменты и к каждому подхожу с разных сторон.</p></div>
+      <div class="sol-item fade d5"><div class="sol-icon"><svg width="24" height="24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div><h3>Перенимаю опыт великих</h3><p>Опираюсь на лучшие практики мирового маркетинга (Огилви, Nike) и адаптирую их под ваш проект.</p></div>
     </div>
   </div>
 </section>
- 
+
 <!-- INCLUDED -->
 <section class="included">
   <div class="container included-grid">
@@ -592,7 +676,7 @@ svg{display:inline-block;fill:none;stroke:currentColor;stroke-width:2;stroke-lin
     </div>
   </div>
 </section>
- 
+
 <!-- PROCESS -->
 <section class="process">
   <div class="container">
@@ -607,7 +691,7 @@ svg{display:inline-block;fill:none;stroke:currentColor;stroke-width:2;stroke-lin
     </div>
   </div>
 </section>
- 
+
 <!-- CASES -->
 <section class="cases section-glow" id="кейсы">
   <div class="container">
@@ -619,17 +703,78 @@ svg{display:inline-block;fill:none;stroke:currentColor;stroke-width:2;stroke-lin
       <div class="glass-card stat-card fade d3"><div class="stat-val" data-counter="8.2" data-suffix="%" data-float="1">8.2%</div><div class="stat-label">лучший CTR</div></div>
       <div class="glass-card stat-card fade d4"><div class="stat-val" data-counter="2.5" data-suffix=" ₽" data-float="1">2.5 ₽</div><div class="stat-label">цена клика</div></div>
     </div>
-    <div class="cases-scroll" id="casesScroll"></div>
-    <div class="scroll-hint"><div class="scroll-bar"><div class="scroll-progress"></div></div><span>Листайте вправо</span></div>
+    <div class="cases-placeholder-grid">
+
+      <!-- РЕАЛЬНЫЙ КЕЙС: Корм для собак -->
+      <div class="glass-card case-placeholder fade d1">
+        <div class="cp-top">
+          <div class="cp-tag cp-tag-real">Корм для собак 🐶</div>
+        </div>
+        <div class="cp-body">
+          <p class="cp-result" style="color:var(--text-main);font-style:normal;background:rgba(72,17,115,.04);border-color:rgba(72,17,115,.15);">Получили более <strong>3 000 переходов</strong> по <strong>2.5 ₽</strong> на карточку товара — целевые владельцы собак.</p>
+        </div>
+      </div>
+
+      <!-- Кейс 2: Капсулы для стирки -->
+      <div class="glass-card case-placeholder fade d2">
+        <div class="cp-top">
+          <div class="cp-tag cp-tag-real">Капсулы для стирки 🧺</div>
+        </div>
+        <div class="cp-body">
+          <p class="cp-result" style="color:var(--text-main);font-style:normal;background:rgba(72,17,115,.04);border-color:rgba(72,17,115,.15);">Больше <strong>1 000 кликов по 3–5 ₽</strong>. Рекламировали сразу несколько товаров по цене бюджета одного артикула — в формате каталога.</p>
+        </div>
+      </div>
+
+      <!-- Кейс 3: Зарядка в авто -->
+      <div class="glass-card case-placeholder fade d3">
+        <div class="cp-top">
+          <div class="cp-tag cp-tag-real">Зарядка в авто 🔌</div>
+        </div>
+        <div class="cp-body">
+          <p class="cp-result" style="color:var(--text-main);font-style:normal;background:rgba(72,17,115,.04);border-color:rgba(72,17,115,.15);"><strong>3 859 переходов по 3 ₽</strong> по целевым поисковым запросам.</p>
+        </div>
+      </div>
+
+      <!-- Кейс 4: Женские костюмы -->
+      <div class="glass-card case-placeholder fade d4">
+        <div class="cp-top">
+          <div class="cp-tag cp-tag-real">Женские костюмы WB 👗</div>
+        </div>
+        <div class="cp-body">
+          <p class="cp-result" style="color:var(--text-main);font-style:normal;background:rgba(72,17,115,.04);border-color:rgba(72,17,115,.15);">Феноменальный <strong>CTR 13%</strong> по <strong>1.31 ₽</strong>. За один день всего на <strong>200 ₽ рекламного бюджета</strong> (данные на время обеда) — уже <strong>154 перехода</strong> по 1.33 ₽ целевых покупателей.</p>
+        </div>
+      </div>
+
+      <!-- Кейс 5: БАДы -->
+      <div class="glass-card case-placeholder fade d5">
+        <div class="cp-top">
+          <div class="cp-tag cp-tag-real">БАДы 💊</div>
+        </div>
+        <div class="cp-body">
+          <p class="cp-result" style="color:var(--text-main);font-style:normal;background:rgba(72,17,115,.04);border-color:rgba(72,17,115,.15);">Больше <strong>7 000 кликов по 1.62 ₽</strong>. Рекламировали сразу на двух маркетплейсах: <strong>WB и Ozon</strong>.</p>
+        </div>
+      </div>
+
+      <!-- Кейс 6: Игровые кресла -->
+      <div class="glass-card case-placeholder fade d5">
+        <div class="cp-top">
+          <div class="cp-tag cp-tag-real">Компьютерные кресла 🪑</div>
+        </div>
+        <div class="cp-body">
+          <p class="cp-result" style="color:var(--text-main);font-style:normal;background:rgba(72,17,115,.04);border-color:rgba(72,17,115,.15);">Больше <strong>6 000 переходов по 2.74 ₽</strong> на карточки игровых премиум кресел стоимостью от <strong>25 000 ₽</strong> — сразу со скидками маркетплейса.</p>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
- 
+
 <!-- ABOUT -->
 <section class="about" id="отзывы">
   <div class="container about-grid">
     <div class="about-photo-wrap fade-left">
       <div class="about-glow"></div>
-      <div class="about-photo"><img src="https://i.ibb.co/7NrFyQDp/IMG-7416.jpg" alt="Юлия" referrerpolicy="no-referrer"/></div>
+      <div class="about-photo"><img src="https://i.ibb.co/My31WtRg/IMG-0698.jpg" alt="Юлия" referrerpolicy="no-referrer"/></div>
       <div class="glass-card about-award">
         <div class="about-award-icon"><svg width="24" height="24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
         <div><div style="font-size:1.125rem;font-weight:700;">500+</div><div style="font-size:.625rem;color:var(--text-sec);text-transform:uppercase;letter-spacing:.1em;">Успешных кампаний</div></div>
@@ -653,14 +798,14 @@ svg{display:inline-block;fill:none;stroke:currentColor;stroke-width:2;stroke-lin
     </div>
   </div>
 </section>
- 
+
 <!-- PRICING -->
 <section class="pricing section-glow" id="тарифы">
   <div class="container">
     <h2 class="section-title fade">Стоимость работы</h2>
     <p class="section-sub fade d1">Прозрачные условия без скрытых платежей</p>
     <div class="pricing-grid">
- 
+
       <!-- Колонка 1: САЙТ-ГИПНОЗ -->
       <div class="glass-card pricing-col fade d1">
         <div class="pc-head">
@@ -683,7 +828,7 @@ svg{display:inline-block;fill:none;stroke:currentColor;stroke-width:2;stroke-lin
         </ul>
         <a href="#contact" class="btn-secondary pc-btn">Заказать</a>
       </div>
- 
+
       <!-- Колонка 2: РЕКЛАМА (выделенная) -->
       <div class="glass-card pricing-col pricing-col--featured fade d2">
         <div class="pricing-ribbon-v2">Популярно</div>
@@ -708,7 +853,7 @@ svg{display:inline-block;fill:none;stroke:currentColor;stroke-width:2;stroke-lin
         <a href="#contact" class="btn-primary pc-btn">Начать работу</a>
         <p class="pc-note">* Рекламный бюджет оплачивается отдельно. Рекомендуем от 15 000 ₽/мес.</p>
       </div>
- 
+
       <!-- Колонка 3: ВОРОНКА ПОД КЛЮЧ -->
       <div class="glass-card pricing-col fade d3">
         <div class="pc-head">
@@ -731,19 +876,19 @@ svg{display:inline-block;fill:none;stroke:currentColor;stroke-width:2;stroke-lin
         </ul>
         <a href="#contact" class="btn-secondary pc-btn">Заказать</a>
       </div>
- 
+
     </div>
   </div>
 </section>
- 
+
 <!-- FAQ -->
-<section class="faq">
+<section class="faq" id="faq">
   <div class="container faq-wrap">
     <h2 class="section-title fade">Отвечаю на частые вопросы</h2>
-    <div class="glass-card faq-card fade d1" id="faqList"></div>
+    <div class="glass-card faq-card" id="faqList"></div>
   </div>
 </section>
- 
+
 <!-- CONTACT -->
 <section class="contact section-glow" id="contact">
   <div class="container">
@@ -751,16 +896,18 @@ svg{display:inline-block;fill:none;stroke:currentColor;stroke-width:2;stroke-lin
       <h2>Давайте обсудим ваш товар</h2>
       <p class="sub">Без скриптов продаж. Просто честный разговор о рекламе</p>
       <div class="contact-form">
-        <div class="form-group"><label class="form-label">Ваше имя</label><input type="text" class="form-input" placeholder="Иван"/></div>
-        <div class="form-group"><label class="form-label">Телефон или Telegram</label><input type="text" class="form-input" placeholder="+7 (999) 000-00-00"/></div>
-        <div class="form-group"><label class="form-label">Ссылка на товар (необязательно)</label><input type="text" class="form-input" placeholder="wildberries.ru/catalog/..."/></div>
-        <button class="btn-primary" style="width:100%;margin-top:.5rem;" onclick="handleSubmit(event)">Написать Юлии <svg width="20" height="20"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9"/></svg></button>
+        <form action="https://formspree.io/f/ВАШ_ID" method="POST">
+        <div class="form-group"><label class="form-label">Ваше имя</label><input type="text" name="name" class="form-input" placeholder="Иван"/></div>
+        <div class="form-group"><label class="form-label">Телефон или Telegram</label><input type="text" name="phone" class="form-input" placeholder="+7 (999) 000-00-00"/></div>
+        <div class="form-group"><label class="form-label">Ссылка на товар (необязательно)</label><input type="text" name="link" class="form-input" placeholder="wildberries.ru/catalog/..."/></div>
+        <button type="submit" class="btn-primary" style="width:100%;margin-top:.5rem;">Написать Юлии <svg width="20" height="20"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9"/></svg></button>
         <p class="form-note">Отвечу в рабочее время. Никакого спама — только по делу.</p>
+        </form>
       </div>
     </div>
   </div>
 </section>
- 
+
 <!-- FOOTER -->
 <footer>
   <div class="container">
@@ -782,6 +929,7 @@ svg{display:inline-block;fill:none;stroke:currentColor;stroke-width:2;stroke-lin
         <div class="footer-contact-list">
           <a href="tel:89235703335"><svg width="16" height="16"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.65a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg> 8 (923) 570-33-35</a>
           <a href="#"><svg width="16" height="16"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9"/></svg> Telegram</a>
+          <a href="#"><svg width="16" height="16"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> MAX</a>
           <a href="https://vk.com/seonado_target" target="_blank"><svg width="16" height="16"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> ВКонтакте</a>
         </div>
       </div>
@@ -792,60 +940,27 @@ svg{display:inline-block;fill:none;stroke:currentColor;stroke-width:2;stroke-lin
     </div>
   </div>
 </footer>
- 
+
 <script>
 // ── NAV SCROLL ──
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', scrollY > 50));
- 
+
 // ── MOBILE MENU ──
 const ham = document.getElementById('hamburger');
 const mob = document.getElementById('mobile-nav');
 ham.addEventListener('click', () => { const o = mob.classList.toggle('open'); ham.textContent = o ? '✕' : '☰'; });
 function closeMob(){ mob.classList.remove('open'); ham.textContent = '☰'; }
- 
+
 // ── CHART BARS ──
 const heights = [40,70,45,90,65,85,55,95,75,100];
 const barsEl = document.getElementById('chartBars');
-if(barsEl) {
-    heights.forEach((h, i) => {
-      const d = document.createElement('div');
-      d.style.cssText = `flex:1;background:rgba(72,17,115,.35);border-radius:2px 2px 0 0;height:${h}%;animation-delay:${0.5+i*0.05}s;`;
-      barsEl.appendChild(d);
-    });
-}
- 
-// ── CASES ──
-const cases = [
-  {cat:'Товары для дома',was:'CTR 0.4%, цена клика 45 ₽',now:'CTR 2.1%, цена клика 6 ₽',extra:'8 400 переходов за месяц',bg:'linear-gradient(135deg,rgba(168,85,247,.2),rgba(203,17,171,.2))'},
-  {cat:'Детские игрушки',was:'Реклама не запущена',now:'15 200 переходов, CTR 2.8%',extra:'Цена клика 4.8 ₽',bg:'linear-gradient(135deg,rgba(59,130,246,.2),rgba(168,85,247,.2))'},
-  {cat:'Косметика',was:'Высокий CPM',now:'Снизили CPM на 40%',extra:'Цена клика: 3 ₽',bg:'linear-gradient(135deg,rgba(236,72,153,.2),rgba(203,17,171,.2))'},
-  {cat:'Женская одежда',was:'CTR 0.6%, заказы по 450 ₽',now:'CTR 3.2%, заказы по 180 ₽',extra:'ROI 580%',bg:'linear-gradient(135deg,rgba(99,102,241,.2),rgba(59,130,246,.2))'},
-  {cat:'Сумки и аксессуары',was:'Цена клика 28 ₽',now:'Цена клика 5.2 ₽, CTR 1.9%',extra:'Масштабировали бюджет в 5 раз',bg:'linear-gradient(135deg,rgba(203,17,171,.2),rgba(168,85,247,.2))'},
-  {cat:'Электроника',was:'Мало переходов',now:'12 000 переходов, CTR 1.5%',extra:'Цена клика 7.5 ₽',bg:'linear-gradient(135deg,rgba(100,116,139,.2),rgba(99,102,241,.2))'},
-  {cat:'Зоотовары',was:'CTR 0.3%',now:'CTR 2.5%, цена клика 4.2 ₽',extra:'Вышли в ТОП по запросам',bg:'linear-gradient(135deg,rgba(34,197,94,.2),rgba(20,184,166,.2))'},
-  {cat:'Спорттовары',was:'Высокая цена заказа',now:'Снизили CPO в 3 раза',extra:'CTR 2.9%',bg:'linear-gradient(135deg,rgba(249,115,22,.2),rgba(239,68,68,.2))'},
-  {cat:'Канцелярия',was:'Реклама в минус',now:'ROI 450%, цена клика 3.8 ₽',extra:'Подготовка к сезону за 2 недели',bg:'linear-gradient(135deg,rgba(234,179,8,.2),rgba(249,115,22,.2))'},
-  {cat:'Автотовары',was:'CTR 0.5%',now:'CTR 1.8%, цена клика 6.5 ₽',extra:'Стабильный поток заказов',bg:'linear-gradient(135deg,rgba(107,114,128,.2),rgba(71,85,105,.2))'},
-];
-const scroll = document.getElementById('casesScroll');
-if(scroll) {
-    cases.forEach(c => {
-      scroll.innerHTML += `<div class="glass-card case-card">
-        <div class="case-thumb" style="background:${c.bg};">
-          <svg width="48" height="48"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          <div class="case-thumb-overlay"></div>
-          <div class="case-badge">${c.cat}</div>
-        </div>
-        <div class="case-body">
-          <div class="case-row divider"><span class="lbl">Было:</span><span class="was">${c.was}</span></div>
-          <div class="case-row"><span class="lbl">Стало:</span><span class="now">${c.now}</span></div>
-          <div class="case-extra">${c.extra}</div>
-        </div>
-      </div>`;
-    });
-}
- 
+heights.forEach((h, i) => {
+  const d = document.createElement('div');
+  d.style.cssText = `flex:1;background:rgba(72,17,115,.35);border-radius:2px 2px 0 0;height:${h}%;animation-delay:${0.5+i*0.05}s;`;
+  barsEl.appendChild(d);
+});
+
 // ── FAQ ──
 const faqs = [
   {q:'Я уже пробовал таргет — не получил результат.',a:'Чаще всего это случается из-за отсутствия стратегии: реклама запускалась без анализа аудитории, без теста гипотез и без оптимизации. Моя работа начинается именно с этого — и только потом запуск. Мы находим то, что реально работает.'},
@@ -857,25 +972,23 @@ const faqs = [
   {q:'Как начать работу?',a:'Оставьте заявку → я свяжусь с вами → проведём бесплатный разбор вашей карточки → обсудим стратегию и условия → запускаемся.'},
 ];
 const faqList = document.getElementById('faqList');
-if(faqList) {
-    faqs.forEach((f, i) => {
-      const item = document.createElement('div');
-      item.className = 'faq-item';
-      item.innerHTML = `<button class="faq-btn" onclick="toggleFaq(${i})">
-        <h3>${f.q}</h3>
-        <svg class="faq-arrow" id="arrow${i}" width="20" height="20"><polyline points="6,9 12,15 18,9"/></svg>
-      </button>
-      <div class="faq-body" id="body${i}"><p>${f.a}</p></div>`;
-      faqList.appendChild(item);
-    });
-}
+faqs.forEach((f, i) => {
+  const item = document.createElement('div');
+  item.className = 'faq-item';
+  item.innerHTML = `<button class="faq-btn" onclick="toggleFaq(${i})">
+    <h3>${f.q}</h3>
+    <svg class="faq-arrow" id="arrow${i}" width="20" height="20"><polyline points="6,9 12,15 18,9"/></svg>
+  </button>
+  <div class="faq-body" id="body${i}"><p>${f.a}</p></div>`;
+  faqList.appendChild(item);
+});
 function toggleFaq(i){
   const body = document.getElementById('body'+i);
   const arrow = document.getElementById('arrow'+i);
   const open = body.classList.toggle('open');
   arrow.classList.toggle('open', open);
 }
- 
+
 // ── COUNTER ──
 function animateCounter(el){
   const target = parseFloat(el.dataset.counter);
@@ -890,25 +1003,24 @@ function animateCounter(el){
     if(frame >= frames){ el.textContent = (isFloat ? target.toFixed(1) : target) + suffix; clearInterval(t); }
   }, 1000/fps);
 }
- 
+
 // ── INTERSECTION OBSERVER ──
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if(e.isIntersecting){
-      e.target.classList.add('visible');
-      // counter
+      e.target.classList.add('animate');
       if(e.target.dataset.counter) animateCounter(e.target);
       io.unobserve(e.target);
     }
   });
-}, {threshold:.15});
+}, {threshold:0, rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.fade,.fade-left,.fade-right').forEach(el => io.observe(el));
 document.querySelectorAll('[data-counter]').forEach(el => io.observe(el));
- 
+
 // ── FORM ──
 function handleSubmit(e){
   e.preventDefault();
-  const btn = e.target.closest('button');
+  const btn = e.target;
   btn.textContent = '✔ Отправлено!';
   btn.style.background = 'var(--success)';
   setTimeout(() => { btn.innerHTML = 'Написать Юлии <svg width="20" height="20"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9"/></svg>'; btn.style.background=''; }, 3000);
