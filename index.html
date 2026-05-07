@@ -1,763 +1,907 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Юлия — Таргет для маркетплейсов</title>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #fff;
-      --bg2: #F6F6F9;
-      --accent: #481173;
-      --accent2: #CB11AB;
-      --hover: #360d56;
-      --text: #1a1a1a;
-      --muted: #4a4a4a;
-      --green: #00B027;
-      --shadow: 0 10px 30px rgba(72, 17, 115, .2);
-    }
-    ::selection { background: var(--accent); color: #fff; }
-    html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: 'Manrope', sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-    a { text-decoration: none; color: inherit; }
-    img { display: block; max-width: 100%; }
-    svg { display: inline-block; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Юлия — Таргет для маркетплейсов</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg-main:#FFFFFF;
+  --bg-secondary:#F6F6F9;
+  --accent:#481173;
+  --accent-sec:#CB11AB;
+  --accent-hover:#360d56;
+  --text-main:#242424;
+  --text-sec:#626262;
+  --success:#00B027;
+  --shadow-accent:0 10px 30px rgba(72,17,115,.2);
+}
+::selection{background:var(--accent);color:#fff;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg-main);color:var(--text-main);font-family:'Manrope',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;}
+ 
+/* ── CONTAINER ── */
+.container{max-width:1200px;margin:0 auto;padding:0 1.5rem;}
+ 
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;width:100%;z-index:50;
+  background:#fff;
+  border-bottom:1px solid rgba(0,0,0,.08);
+  transition:box-shadow .3s;
+}
+nav.scrolled{box-shadow:0 2px 12px rgba(0,0,0,.08);}
+.nav-inner{
+  display:flex;justify-content:space-between;align-items:stretch;
+  min-height:90px;
+  max-width:none;
+  padding:0;
+}
+.nav-logo{
+  display:flex;align-items:center;gap:.75rem;
+  padding:0 2.5rem;
+  border-right:1px solid rgba(0,0,0,.08);
+  flex-shrink:0;
+}
+.nav-logo .acc{
+  font-size:1.5rem;font-weight:800;letter-spacing:-.04em;
+  color:var(--accent);
+}
+.nav-logo .sep-line{
+  width:1px;height:2.2rem;
+  background:rgba(0,0,0,.15);
+  flex-shrink:0;
+}
+.nav-logo .sub{
+  font-size:.65rem;font-weight:700;
+  color:rgba(36,36,36,.7);
+  text-transform:uppercase;letter-spacing:.12em;
+  line-height:1.4;
+  max-width:8rem;
+}
+.nav-links{
+  display:flex;align-items:center;gap:2.5rem;
+  flex:1;padding:0 2.5rem;
+}
+.nav-links a{
+  font-size:.9375rem;font-weight:500;
+  color:var(--text-sec);transition:color .2s;
+}
+.nav-links a:hover{color:var(--accent);}
+.nav-cta-wrap{
+  display:flex;align-items:stretch;
+  border-left:1px solid rgba(0,0,0,.08);
+  flex-shrink:0;
+}
+.nav-cta{
+  display:flex;align-items:center;justify-content:center;
+  background:var(--accent);color:#fff;
+  padding:0 2.5rem;
+  font-size:1rem;font-weight:700;
+  line-height:1.35;
+  text-align:center;
+  transition:background .2s;
+  white-space:normal;
+  max-width:14rem;
+}
+.nav-cta:hover{background:var(--accent-hover);}
+.hamburger{display:none;background:none;border:none;cursor:pointer;font-size:1.5rem;color:var(--text-main);padding:0 1.5rem;}
+.mobile-nav{display:none;flex-direction:column;gap:1rem;padding:1.5rem;background:#fff;border-top:1px solid rgba(0,0,0,.08);max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s ease;}
+.mobile-nav.open{max-height:400px;padding:1.5rem;}
+.mobile-nav a{font-size:1rem;font-weight:600;color:var(--text-main);}
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .nav-cta-wrap{display:none;}
+  .hamburger{display:flex;align-items:center;}
+  .mobile-nav{display:flex;}
+  .nav-logo{border-right:none;padding:0 1.5rem;}
+  .nav-inner{min-height:70px;}
+}
+ 
+/* ── BUTTONS ── */
+.btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:linear-gradient(90deg,var(--accent),var(--accent-sec));color:#fff;font-weight:800;padding:1rem 2.5rem;border-radius:1rem;box-shadow:var(--shadow-accent);transition:all .3s;cursor:pointer;border:none;font-family:'Manrope',sans-serif;font-size:1rem;}
+.btn-primary:hover{transform:scale(1.05);}
+.btn-secondary{display:inline-flex;align-items:center;justify-content:center;border:2px solid var(--accent);color:var(--accent);font-weight:800;padding:1rem 2.5rem;border-radius:1rem;transition:all .3s;cursor:pointer;}
+.btn-secondary:hover{background:rgba(72,17,115,.05);}
+ 
+/* ── GLASS CARD ── */
+.glass-card{background:#fff;border:1px solid rgba(0,0,0,.05);border-radius:1.5rem;box-shadow:0 1px 3px rgba(0,0,0,.05);transition:all .3s;}
+.glass-card:hover{box-shadow:0 20px 40px rgba(0,0,0,.1);border-color:rgba(72,17,115,.1);transform:translateY(-6px);}
+ 
+/* ── SECTION GLOW ── */
+.section-glow{position:relative;overflow:hidden;}
+.section-glow::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:800px;background:rgba(203,17,171,.05);filter:blur(150px);border-radius:50%;z-index:0;pointer-events:none;}
+ 
+/* ════════════════════════════════
+   HERO
+════════════════════════════════ */
+.hero{padding:10rem 0 5rem;}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:#f5e6f5;border:none;padding:.5rem 1.25rem;border-radius:9999px;color:var(--accent);font-size:.875rem;font-weight:600;margin-bottom:2rem;}
+.hero h1{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;line-height:1.1;letter-spacing:-.03em;margin-bottom:2rem;}
+.hero h1 .acc{color:var(--accent);}
+.hero-desc{font-size:1.125rem;color:var(--text-sec);max-width:34rem;line-height:1.7;margin-bottom:2.5rem;}
+.hero-checks{display:flex;flex-direction:column;gap:1.25rem;margin-bottom:2.5rem;}
+.hero-check{display:flex;align-items:center;gap:.875rem;}
+.hero-check-icon{width:1.625rem;height:1.625rem;border-radius:50%;background:rgba(72,17,115,.07);border:1.5px solid rgba(72,17,115,.18);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.hero-check-icon svg{width:1rem;height:1rem;color:var(--accent);}
+.hero-check span{font-size:1rem;font-weight:400;color:var(--text-main);}
+.hero-cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:1.5rem;}
+.hero-note{font-size:.75rem;color:var(--text-sec);max-width:12rem;line-height:1.5;}
+ 
+.analytics-wrap{
+  position:relative;
+  margin-top:2.5rem;
+  max-width:400px;
+}
 
-    /* NAV */
-    nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 50; background: #fff; border-bottom: 1px solid rgba(0, 0, 0, .08); transition: box-shadow .3s; }
-    nav.scrolled { box-shadow: 0 2px 12px rgba(0, 0, 0, .08); }
-    .nav-i { display: flex; justify-content: space-between; align-items: stretch; min-height: 90px; }
-    .nav-logo { display: flex; align-items: center; gap: .75rem; padding: 0 2.5rem; border-right: 1px solid rgba(0, 0, 0, .08); flex-shrink: 0; }
-    .nav-logo .acc { font-size: 1.5rem; font-weight: 800; letter-spacing: -.04em; color: var(--accent); }
-    .nav-logo .vl { width: 1px; height: 2.2rem; background: rgba(0, 0, 0, .15); }
-    .nav-logo .sub { font-size: .65rem; font-weight: 700; color: rgba(36, 36, 36, .7); text-transform: uppercase; letter-spacing: .12em; line-height: 1.4; max-width: 8rem; }
-    .nav-links { display: flex; align-items: center; gap: 2.5rem; flex: 1; padding: 0 2.5rem; }
-    .nav-links a { font-size: .9375rem; font-weight: 500; color: var(--muted); transition: color .2s; }
-    .nav-links a:hover { color: var(--accent); }
-    .nav-cta-w { display: flex; align-items: stretch; border-left: 1px solid rgba(0, 0, 0, .08); flex-shrink: 0; }
-    .nav-cta { display: flex; align-items: center; justify-content: center; background: var(--accent); color: #fff; padding: 0 2.5rem; font-size: 1rem; font-weight: 700; line-height: 1.35; text-align: center; transition: background .2s; white-space: normal; max-width: 14rem; }
-    .nav-cta:hover { background: var(--hover); }
-    .ham { display: none; background: none; border: none; cursor: pointer; font-size: 1.5rem; color: var(--text); padding: 0 1.5rem; }
-    .mob-nav { display: none; flex-direction: column; gap: 1rem; padding: 1.5rem; background: #fff; border-top: 1px solid rgba(0, 0, 0, .08); max-height: 0; overflow: hidden; transition: max-height .4s, padding .4s; }
-    .mob-nav.open { max-height: 400px; padding: 1.5rem; }
-    .mob-nav a { font-size: 1rem; font-weight: 600; color: var(--text); }
-    @media (max-width: 768px) {
-      .nav-links, .nav-cta-w { display: none; }
-      .ham { display: flex; align-items: center; }
-      .mob-nav { display: flex; }
-      .nav-logo { border-right: none; padding: 0 1.5rem; }
-      .nav-i { min-height: 70px; }
-    }
-
-    /* BUTTONS */
-    .btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; background: var(--accent); color: #fff; font-weight: 800; padding: 1rem 2.5rem; border-radius: 1rem; box-shadow: var(--shadow); transition: all .3s; cursor: pointer; border: none; font-family: 'Manrope', sans-serif; font-size: 1rem; }
-    .btn:hover { transform: scale(1.05); background: var(--hover); }
-    .btn-out { display: inline-flex; align-items: center; justify-content: center; border: 2px solid var(--accent); color: var(--accent); font-weight: 800; padding: 1rem 2.5rem; border-radius: 1rem; transition: all .3s; cursor: pointer; }
-    .btn-out:hover { background: rgba(72, 17, 115, .05); }
-
-    /* CARDS */
-    .card { background: #fff; border: 1px solid rgba(0, 0, 0, .05); border-radius: 1.5rem; box-shadow: 0 1px 3px rgba(0, 0, 0, .05); transition: all .3s; }
-    .card:hover { box-shadow: 0 20px 40px rgba(0, 0, 0, .1); border-color: rgba(72, 17, 115, .1); transform: translateY(-6px); }
-
-    /* HERO */
-    .hero { padding: 10rem 0 5rem; }
-    .hero-badge { display: inline-flex; align-items: center; gap: .5rem; background: #f5e6f5; padding: .5rem 1.25rem; border-radius: 9999px; color: var(--accent); font-size: .875rem; font-weight: 600; margin-bottom: 2rem; }
-    .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -.03em; margin-bottom: 2rem; color: var(--text); }
-    .hero h1 .acc { color: var(--accent); }
-    .hero-desc { font-size: 1.125rem; color: var(--muted); max-width: 34rem; line-height: 1.7; margin-bottom: 2.5rem; }
-    .hero-checks { display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 2.5rem; }
-    .hc { display: flex; align-items: center; gap: .875rem; }
-    .hc-icon { width: 1.625rem; height: 1.625rem; border-radius: 50%; background: rgba(72, 17, 115, .07); border: 1.5px solid rgba(72, 17, 115, .18); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .hc-icon svg { width: 1rem; height: 1rem; color: var(--accent); }
-    .hc span { font-size: 1rem; font-weight: 400; color: var(--text); }
-    .hero-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem; }
-    .hero-note { font-size: .75rem; color: var(--muted); max-width: 12rem; line-height: 1.5; }
-
-    /* analytics */
-    .ac { padding: 2rem; background: #fff; max-width: 480px; margin-bottom: 2.5rem; }
-    .ac-dots { display: flex; gap: .375rem; margin-bottom: 1.5rem; }
-    .ac-dots span { width: .5rem; height: .5rem; border-radius: 50%; }
-    .ac-lbl { font-size: .625rem; font-family: monospace; text-transform: uppercase; letter-spacing: .1em; color: rgba(0, 0, 0, .2); }
-    .bars { height: 8rem; background: var(--bg2); border-radius: .75rem; border: 1px solid rgba(0, 0, 0, .05); display: flex; align-items: flex-end; padding: 1rem; gap: .375rem; margin-bottom: 1rem; }
-    .bars div { flex: 1; background: rgba(72, 17, 115, .35); border-radius: 2px 2px 0 0; }
-    .ac-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .ac-cell { padding: 1rem; background: var(--bg2); border-radius: .75rem; border: 1px solid rgba(0, 0, 0, .05); }
-    .ac-cell .lbl { font-size: .625rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: .25rem; }
-    .ac-cell .val { font-size: 1.25rem; font-weight: 700; }
-    .val.g { color: var(--green); }
-    .val.p { color: var(--accent); }
-    .val.m { color: var(--accent2); }
-
-    /* PAIN */
-    .pain { padding: 6rem 0; background: var(--bg2); }
-    .sec-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; text-align: center; margin-bottom: 1rem; color: var(--text); }
-    .sec-sub { color: var(--muted); text-align: center; margin-bottom: 4rem; }
-    .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-    .pain-card { padding: 2rem; background: #fff; }
-    .pain-card .ico { font-size: 2.5rem; margin-bottom: 1.5rem; }
-    .pain-card h3 { font-size: 1.125rem; font-weight: 700; margin-bottom: .75rem; color: var(--text); }
-    .pain-card p { color: var(--muted); font-size: .875rem; line-height: 1.7; }
-    .pain-bottom { text-align: center; margin-top: 4rem; font-size: 1.25rem; font-weight: 500; color: var(--text); }
-    .pain-bottom .u { color: var(--accent); text-decoration: underline; text-decoration-color: rgba(72, 17, 115, .3); text-underline-offset: .5rem; }
-
-    /* SOLUTION */
-    .solution { padding: 6rem 0; }
-    .quote-card { padding: 3rem 4rem; text-align: center; position: relative; overflow: hidden; background: var(--bg2); margin-bottom: 4rem; border-radius: 1.5rem; }
-    .quote-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--accent), transparent); opacity: .3; }
-    .quote-card p { font-size: 1.25rem; font-weight: 500; line-height: 1.7; max-width: 46rem; margin: 0 auto; color: var(--text); }
-    .sol-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-    @media (max-width: 900px) { .sol-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 600px) { .sol-grid { grid-template-columns: 1fr; } }
-    .sol-item { text-align: center; }
-    .sol-ico { width: 3.5rem; height: 3.5rem; border-radius: 1rem; background: rgba(72, 17, 115, .05); border: 1px solid rgba(72, 17, 115, .1); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: var(--accent); }
-    .sol-ico svg { width: 1.5rem; height: 1.5rem; }
-    .sol-item h3 { font-size: 1.0625rem; font-weight: 700; margin-bottom: .75rem; color: var(--text); }
-    .sol-item p { color: var(--muted); font-size: .875rem; line-height: 1.6; }
-
-    /* INCLUDED */
-    .included { padding: 6rem 0; background: rgba(246, 246, 249, .5); }
-    .inc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-    @media (max-width: 768px) { .inc-grid { grid-template-columns: 1fr; } }
-    .included h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1.5rem; color: var(--text); }
-    .included .sub { color: var(--muted); margin-bottom: 2.5rem; }
-    .chk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .chk { display: flex; align-items: flex-start; gap: .75rem; }
-    .chk svg { width: 1.25rem; height: 1.25rem; color: var(--green); flex-shrink: 0; margin-top: .125rem; }
-    .chk span { font-size: .875rem; font-weight: 500; color: var(--text); }
-    .trans-card { padding: 2rem; background: rgba(72, 17, 115, .05); border-color: rgba(72, 17, 115, .1); position: relative; }
-    .trans-ico { position: absolute; top: -1rem; left: -1rem; width: 3rem; height: 3rem; background: var(--accent); border-radius: .75rem; display: flex; align-items: center; justify-content: center; color: #fff; box-shadow: var(--shadow); }
-    .trans-ico svg { width: 1.5rem; height: 1.5rem; }
-    .trans-card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem; margin-top: 1.5rem; color: var(--accent); }
-    .trans-card p { color: var(--muted); line-height: 1.7; margin-bottom: 1.5rem; }
-    .trust-b { display: flex; align-items: center; gap: .5rem; color: var(--accent2); font-size: .875rem; font-weight: 700; }
-    .trust-b svg { width: 1.25rem; height: 1.25rem; }
-
-    /* PROCESS */
-    .process { padding: 6rem 0; }
-    .timeline { max-width: 48rem; margin: 0 auto; position: relative; }
-    .timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(0, 0, 0, .1); transform: translateX(-50%); }
-    @media (max-width: 640px) { .timeline::before { display: none; } }
-    .tl-item { display: flex; flex-direction: column; margin-bottom: 4rem; }
-    .tl-item:nth-child(odd) { align-items: flex-end; }
-    .tl-item:nth-child(even) { align-items: flex-start; }
-    .tl-card { width: 46%; position: relative; padding: 1.5rem; background: var(--bg2); border-radius: 1.25rem; }
-    @media (max-width: 640px) {
-      .tl-item, .tl-item:nth-child(odd), .tl-item:nth-child(even) { align-items: stretch; }
-      .tl-card { width: 100%; }
-      .tl-dot { display: none; }
-    }
-    .tl-day { font-size: .75rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: .1em; margin-bottom: .5rem; }
-    .tl-card h3 { font-size: 1.125rem; font-weight: 700; margin-bottom: .75rem; color: var(--text); }
-    .tl-card p { color: var(--muted); font-size: .875rem; line-height: 1.6; }
-    .tl-dot { position: absolute; top: 50%; transform: translateY(-50%); width: 1rem; height: 1rem; border-radius: 50%; background: var(--accent); border: 3px solid #fff; }
-    .tl-item:nth-child(odd) .tl-dot { right: -2.7rem; }
-    .tl-item:nth-child(even) .tl-dot { left: -2.7rem; }
-
-    /* CASES */
-    .cases { padding: 6rem 0; background: var(--bg2); }
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 4rem; }
-    @media (max-width: 640px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
-    .stat-card { padding: 1.5rem; text-align: center; background: #fff; box-shadow: 0 2px 8px rgba(0, 0, 0, .06); border-radius: 1.25rem; }
-    .stat-val { font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 800; color: var(--accent); }
-    .stat-label { font-size: .625rem; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; margin-top: .25rem; }
-    .cp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 1rem; }
-    @media (max-width: 900px) { .cp-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 500px) { .cp-grid { grid-template-columns: 1fr; } }
-    .cp { padding: 1.75rem; border: 2px dashed rgba(72, 17, 115, .2); border-radius: 1.25rem; background: #fff; display: flex; flex-direction: column; gap: 1.25rem; transition: border-color .2s, transform .2s; }
-    .cp:hover { border-color: rgba(72, 17, 115, .4); transform: translateY(-4px); }
-    .cp-head { display: flex; justify-content: space-between; align-items: center; }
-    .cp-tag { font-size: .65rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); background: rgba(72, 17, 115, .08); padding: .25rem .75rem; border-radius: 9999px; border: 1px solid rgba(72, 17, 115, .15); }
-    .cp-body p { font-size: .875rem; color: var(--text); font-weight: 500; line-height: 1.6; background: rgba(72, 17, 115, .04); border: 1px solid rgba(72, 17, 115, .1); border-radius: .75rem; padding: .875rem; }
-
-    /* ABOUT */
-    .about { padding: 6rem 0; }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-    @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; } }
-    .photo-wrap { position: relative; }
-    .photo-glow { position: absolute; inset: -1rem; background: rgba(72, 17, 115, .08); filter: blur(2rem); border-radius: 50%; z-index: 0; }
-    .photo-box { aspect-ratio: 1/1; border-radius: 1.5rem; overflow: hidden; border: 2px solid rgba(72, 17, 115, .2); position: relative; z-index: 1; }
-    .photo-box img { width: 100%; height: 100%; object-fit: cover; }
-    .award-chip { position: absolute; bottom: -1.5rem; right: -1.5rem; z-index: 20; padding: 1.5rem; display: flex; align-items: center; gap: 1rem; background: #fff; border-radius: 1.25rem; border: 1px solid rgba(0, 0, 0, .05); box-shadow: 0 8px 24px rgba(0, 0, 0, .1); }
-    .award-ico { width: 3rem; height: 3rem; border-radius: 50%; background: rgba(72, 17, 115, .15); display: flex; align-items: center; justify-content: center; color: var(--accent); }
-    .about h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 2rem; color: var(--text); }
-    .about-txt { display: flex; flex-direction: column; gap: 1.25rem; color: var(--muted); line-height: 1.7; margin-bottom: 2.5rem; }
-    .about-txt .nm { color: var(--text); font-weight: 700; font-size: 1.25rem; }
-    .about-txt .hl { color: var(--accent); font-weight: 700; }
-    .about-tags { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
-    .about-tag { display: flex; align-items: center; gap: .75rem; background: var(--bg2); padding: .75rem; border-radius: .75rem; border: 1px solid rgba(0, 0, 0, .05); }
-    .about-tag svg { width: 1rem; height: 1rem; color: var(--accent); }
-    .about-tag span { font-size: .75rem; font-weight: 700; color: var(--text); }
-
-    /* BRAND TEASER */
-    .brand-teaser { padding: 2.5rem 0 0; text-align: center; }
-    .brand-teaser-card {
-      display: inline-block;
-      background: linear-gradient(135deg, rgba(72, 17, 115, .05), rgba(203, 17, 171, .05));
-      border: 1px solid rgba(72, 17, 115, .15);
-      border-radius: 1.25rem;
-      padding: 1.25rem 2.5rem;
-      font-size: 1rem;
-      color: var(--muted);
-      line-height: 1.7;
-      max-width: 700px;
-      text-align: center;
-    }
-    .brand-teaser-card a { color: var(--accent2); font-weight: 700; border-bottom: 2px solid rgba(203, 17, 171, .3); transition: border-color .2s; }
-    .brand-teaser-card a:hover { border-color: var(--accent2); }
-
-    /* PRICING */
-    .pricing { padding: 6rem 0; background: rgba(246, 246, 249, .5); }
-    .pr-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid rgba(0, 0, 0, .07); border-radius: 1.75rem; overflow: hidden; box-shadow: 0 4px 30px rgba(0, 0, 0, .07); }
-    @media (max-width: 900px) { .pr-grid { grid-template-columns: 1fr; } }
-    .pr-col { padding: 2.5rem 2rem; border-radius: 0; border: none; box-shadow: none; border-right: 1px solid rgba(0, 0, 0, .07); display: flex; flex-direction: column; position: relative; background: #fff; transition: none; }
-    .pr-col:hover { transform: none; box-shadow: none; }
-    .pr-col:last-child { border-right: none; }
-    .pr-feat { background: var(--accent); }
-    .pr-ribbon { position: absolute; top: 1rem; right: 1rem; background: rgba(255, 255, 255, .25); color: #fff; font-size: .6rem; font-weight: 800; padding: .3rem .75rem; border-radius: 9999px; text-transform: uppercase; letter-spacing: .1em; border: 1px solid rgba(255, 255, 255, .3); }
-    .pr-head { margin-bottom: 1.5rem; }
-    .pr-tag { display: inline-block; background: rgba(72, 17, 115, .08); color: var(--accent); font-size: .65rem; font-weight: 800; padding: .25rem .75rem; border-radius: 9999px; text-transform: uppercase; letter-spacing: .1em; margin-bottom: .75rem; }
-    .pr-tag-w { background: rgba(255, 255, 255, .2); color: #fff; }
-    .pr-tag-g { background: rgba(255, 200, 0, .15); color: #b8860b; }
-    .pr-title { font-size: 1.375rem; font-weight: 800; letter-spacing: -.02em; margin-bottom: .5rem; color: var(--text); }
-    .pr-feat .pr-title { color: #fff; }
-    .pr-sub { font-size: .8125rem; color: var(--muted); font-weight: 500; line-height: 1.5; }
-    .pr-feat .pr-sub { color: rgba(255, 255, 255, .7); }
-    .pr-prices { margin-bottom: 1.75rem; padding-bottom: 1.75rem; border-bottom: 1px solid rgba(0, 0, 0, .06); }
-    .pr-feat .pr-prices { border-bottom-color: rgba(255, 255, 255, .15); }
-    .pr-old { display: block; font-size: .875rem; color: rgba(0, 0, 0, .3); text-decoration: line-through; margin-bottom: .25rem; font-weight: 500; }
-    .pr-price { font-size: 2rem; font-weight: 800; color: var(--accent); line-height: 1.1; margin-bottom: .4rem; }
-    .pr-feat .pr-price { color: #fff; }
-    .pr-cur { font-size: 1rem; font-weight: 600; }
-    .pr-special { font-size: .72rem; color: var(--accent2); font-weight: 700; background: rgba(203, 17, 171, .08); padding: .2rem .6rem; border-radius: .5rem; display: inline-block; }
-    .pr-feat .pr-special { background: rgba(255, 255, 255, .15); color: rgba(255, 255, 255, .9); }
-    .pr-list { list-style: none; display: flex; flex-direction: column; gap: .75rem; margin-bottom: 2rem; flex: 1; }
-    .pr-list li { display: flex; align-items: flex-start; gap: .6rem; font-size: .8125rem; color: rgba(36, 36, 36, .8); font-weight: 500; line-height: 1.5; }
-    .pr-feat .pr-list li { color: rgba(255, 255, 255, .85); }
-    .pr-chk { color: var(--green); font-size: .75rem; font-weight: 900; flex-shrink: 0; margin-top: .15rem; }
-    .pr-chk-g { color: #d4a017; }
-    .pr-feat .pr-chk { color: rgba(255, 255, 255, .6); }
-    .pr-btn { width: 100%; display: flex; margin-top: auto; border-radius: .875rem; justify-content: center; font-size: .9375rem; }
-    .pr-feat .pr-btn { background: rgba(255, 255, 255, .2); color: #fff; border-color: rgba(255, 255, 255, .4); }
-    .pr-feat .pr-btn:hover { background: rgba(255, 255, 255, .3); }
-    .pr-note { font-size: .65rem; color: rgba(255, 255, 255, .5); margin-top: 1rem; line-height: 1.5; text-align: center; }
-
-    /* BRAND DETAILS */
-    #brand-details { padding: 5rem 0; background: #fff; border-top: 1px solid rgba(72, 17, 115, .08); }
-    .bd-inner { max-width: 52rem; margin: 0 auto; text-align: center; }
-    .bd-inner h2 { font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; margin-bottom: 1rem; line-height: 1.2; color: var(--text); }
-    .bd-inner h2 span { color: var(--accent); }
-    .bd-text { font-size: 1rem; color: var(--muted); line-height: 1.8; margin-bottom: 2.5rem; max-width: 46rem; margin-left: auto; margin-right: auto; }
-    .bd-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 2.5rem 0; text-align: left; }
-    @media (max-width: 640px) { .bd-steps { grid-template-columns: 1fr; } }
-    .bd-step { background: var(--bg2); border: 1px solid rgba(72, 17, 115, .08); border-radius: 1.25rem; padding: 1.5rem; }
-    .bd-step .sn { font-size: .65rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: var(--accent2); margin-bottom: .75rem; }
-    .bd-step h4 { font-size: 1rem; font-weight: 700; margin-bottom: .5rem; color: var(--text); }
-    .bd-step p { font-size: .8125rem; color: var(--muted); line-height: 1.6; }
-
-    /* FAQ */
-    .faq { padding: 6rem 0; background: var(--bg2); }
-    .faq-wrap { max-width: 56rem; margin: 0 auto; }
-    .faq-card { padding: 2rem 3rem; background: #fff; box-shadow: 0 4px 30px rgba(0, 0, 0, .08); border-radius: 1.5rem; }
-    .faq-item { border-bottom: 1px solid rgba(0, 0, 0, .05); }
-    .faq-item:last-child { border-bottom: none; }
-    .faq-btn { width: 100%; padding: 1.5rem 0; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; text-align: left; gap: 2rem; }
-    .faq-btn h3 { font-size: 1.0625rem; font-weight: 600; color: var(--text); transition: color .2s; font-family: 'Manrope', sans-serif; }
-    .faq-btn:hover h3 { color: var(--accent); }
-    .faq-arr { width: 1.25rem; height: 1.25rem; color: var(--accent); flex-shrink: 0; transition: transform .3s; }
-    .faq-arr.open { transform: rotate(180deg); }
-    .faq-body { max-height: 0; overflow: hidden; transition: max-height .35s ease, padding .35s ease; }
-    .faq-body.open { max-height: 500px; padding-bottom: 1.5rem; }
-    .faq-body p { color: var(--muted); line-height: 1.8; white-space: pre-line; }
-
-    /* CONTACT */
-    .contact { padding: 6rem 0; }
-    .contact-card { max-width: 56rem; margin: 0 auto; padding: 4rem; text-align: center; }
-    .contact-card h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 1.5rem; color: var(--text); }
-    .contact-card .sub { color: var(--muted); font-size: 1.125rem; margin-bottom: 3rem; }
-    .c-form { max-width: 32rem; margin: 0 auto; text-align: left; }
-    .fg { margin-bottom: 1.5rem; }
-    .flbl { display: block; font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: .5rem; margin-left: .5rem; }
-    .finp { width: 100%; background: var(--bg2); border: 1px solid rgba(0, 0, 0, .05); border-radius: 1rem; padding: 1rem 1.5rem; font-family: 'Manrope', sans-serif; font-size: 1rem; color: var(--text); transition: border-color .2s; outline: none; }
-    .finp:focus { border-color: var(--accent); }
-    .fnote { text-align: center; font-size: .75rem; color: var(--muted); margin-top: 1.5rem; }
-
-    /* PRESTORY BLOCK */
-    .prestory { padding: 4rem 0; text-align: center; background: var(--bg); border-top: 1px solid rgba(72, 17, 115, .08); }
-    .prestory p { font-size: 1.125rem; color: var(--text); }
-    .prestory a { color: var(--accent2); font-weight: 700; border-bottom: 2px solid rgba(203, 17, 171, .3); transition: border-color .2s; }
-    .prestory a:hover { border-color: var(--accent2); }
-
-    /* FOOTER */
-    footer { padding: 3rem 0; background: var(--bg2); border-top: 1px solid rgba(0, 0, 0, .05); }
-    .foot-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; margin-bottom: 3rem; }
-    @media (max-width: 640px) { .foot-grid { grid-template-columns: 1fr; gap: 2rem; } }
-    .foot-brand p { font-size: .875rem; color: var(--muted); line-height: 1.7; margin-top: 1rem; }
-    .foot-h { font-size: .625rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: rgba(0, 0, 0, .2); margin-bottom: 1rem; }
-    .foot-links { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
-    .foot-links a { font-size: .875rem; color: var(--muted); transition: color .2s; }
-    .foot-links a:hover { color: var(--accent); }
-    .foot-contacts { display: flex; flex-direction: column; gap: .75rem; }
-    .foot-contacts a { display: flex; align-items: center; gap: .75rem; font-size: .875rem; color: var(--muted); transition: color .2s; }
-    .foot-contacts a:hover { color: var(--accent); }
-    .foot-contacts svg { width: 1rem; height: 1rem; }
-    .foot-bottom { padding-top: 2rem; border-top: 1px solid rgba(0, 0, 0, .05); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-    .foot-copy, .foot-policy { font-size: .625rem; color: rgba(0, 0, 0, .2); text-transform: uppercase; letter-spacing: .1em; }
-    .foot-policy:hover { color: var(--accent); }
-
-    /* ANIMS */
-    .fade { opacity: 1; }
-    .fade.animate { animation: fadeUp .7s ease both; }
-    .fade-l.animate { animation: fadeL .8s ease both; }
-    .fade-r.animate { animation: fadeR .8s ease both; }
-    .d1 { animation-delay: .1s; }
-    .d2 { animation-delay: .2s; }
-    .d3 { animation-delay: .3s; }
-    .d4 { animation-delay: .4s; }
-    .d5 { animation-delay: .5s; }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
-    @keyframes fadeL { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: none; } }
-    @keyframes fadeR { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: none; } }
-  </style>
+.analytics-card{padding:2rem;position:relative;overflow:hidden;background:#fff;}
+.analytics-dots{display:flex;gap:.375rem;margin-bottom:2rem;}
+.analytics-dots span{width:.5rem;height:.5rem;border-radius:50%;}
+.analytics-label{font-size:.625rem;font-family:monospace;text-transform:uppercase;letter-spacing:.1em;color:rgba(0,0,0,.2);}
+.chart-bars{height:8rem;background:var(--bg-secondary);border-radius:.75rem;border:1px solid rgba(0,0,0,.05);display:flex;align-items:flex-end;padding:1rem;gap:.375rem;margin-bottom:1rem;}
+.chart-bar{flex:1;background:rgba(72,17,115,.35);border-radius:.125rem .125rem 0 0;transform-origin:bottom;animation:growBar .8s ease forwards;}
+@keyframes growBar{from{transform:scaleY(0);}to{transform:scaleY(1);}}
+.analytics-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.analytics-cell{padding:1rem;background:var(--bg-secondary);border-radius:.75rem;border:1px solid rgba(0,0,0,.05);}
+.analytics-cell .cell-label{font-size:.625rem;color:var(--text-sec);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.25rem;}
+.analytics-cell .cell-val{font-size:1.25rem;font-weight:700;}
+.analytics-cell .cell-val.green{color:var(--success);}
+.analytics-cell .cell-val.purple{color:var(--accent);}
+.float-chip{position:absolute;background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:.75rem;padding:.75rem 1.5rem;box-shadow:0 10px 30px rgba(0,0,0,.12);z-index:20;}
+.float-chip .chip-label{font-size:.625rem;color:var(--text-sec);text-transform:uppercase;letter-spacing:.08em;}
+.float-chip .chip-val{font-size:1.125rem;font-weight:700;}
+.float-chip.chip-top{top:-1.5rem;right:-1rem;animation:floatUp 4s ease-in-out infinite;}
+.float-chip.chip-top .chip-val{color:var(--accent-sec);}
+.float-chip.chip-bot{bottom:-1.5rem;left:-1.5rem;animation:floatDown 5s ease-in-out .5s infinite;}
+.float-chip.chip-bot .chip-val{color:var(--success);}
+@keyframes floatUp{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+@keyframes floatDown{0%,100%{transform:translateY(0);}50%{transform:translateY(10px);}}
+.analytics-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:120%;height:120%;background:rgba(72,17,115,.05);filter:blur(100px);border-radius:50%;z-index:-1;}
+ 
+/* ════════════════════════════════
+   PAIN POINTS
+════════════════════════════════ */
+.pain{padding:6rem 0;background:var(--bg-secondary);}
+.section-title{font-size:clamp(2rem,4vw,3rem);font-weight:800;text-align:center;margin-bottom:1rem;}
+.section-sub{color:var(--text-sec);text-align:center;margin-bottom:4rem;}
+.pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+.pain-card{padding:2rem;background:#fff;}
+.pain-card .icon{font-size:2.5rem;margin-bottom:1.5rem;}
+.pain-card h3{font-size:1.125rem;font-weight:700;margin-bottom:.75rem;}
+.pain-card p{color:var(--text-sec);font-size:.875rem;line-height:1.7;}
+.pain-bottom{text-align:center;margin-top:4rem;font-size:1.25rem;font-weight:500;color:rgba(36,36,36,.8);}
+.pain-bottom .u{color:var(--accent);text-decoration:underline;text-decoration-color:rgba(72,17,115,.3);text-underline-offset:.5rem;}
+ 
+/* ════════════════════════════════
+   SOLUTION
+════════════════════════════════ */
+.solution{padding:6rem 0;background:#fff;}
+.solution-intro{font-size:1.125rem;color:var(--text-sec);text-align:center;max-width:42rem;margin:0 auto 5rem;}
+.quote-card{padding:3rem 4rem;text-align:center;position:relative;overflow:hidden;background:var(--bg-secondary);margin-bottom:4rem;}
+.quote-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:.3;}
+.quote-card p{font-size:1.25rem;font-weight:500;line-height:1.7;max-width:46rem;margin:0 auto;color:var(--text-main);}
+.quote-card .acc{color:var(--accent);font-weight:700;}
+.sol-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;}
+.sol-item{text-align:center;}
+.sol-icon{width:3.5rem;height:3.5rem;border-radius:1rem;background:rgba(72,17,115,.05);border:1px solid rgba(72,17,115,.1);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;color:var(--accent);}
+.sol-icon svg{width:1.5rem;height:1.5rem;}
+.sol-item h3{font-size:1.0625rem;font-weight:700;margin-bottom:.75rem;}
+.sol-item p{color:var(--text-sec);font-size:.875rem;line-height:1.6;}
+ 
+/* ════════════════════════════════
+   INCLUDED
+════════════════════════════════ */
+.included{padding:6rem 0;background:rgba(246,246,249,.5);}
+.included-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+@media(max-width:768px){.included-grid{grid-template-columns:1fr;}}
+.included h2{font-size:2.5rem;font-weight:800;margin-bottom:1.5rem;}
+.included .sub{color:var(--text-sec);margin-bottom:2.5rem;}
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.check-row{display:flex;align-items:flex-start;gap:.75rem;}
+.check-row svg{width:1.25rem;height:1.25rem;color:var(--success);flex-shrink:0;margin-top:.125rem;}
+.check-row span{font-size:.875rem;font-weight:500;color:rgba(36,36,36,.9);}
+.transparency-card{padding:2rem;background:rgba(72,17,115,.05);border-color:rgba(72,17,115,.1);position:relative;}
+.transparency-card .top-icon{position:absolute;top:-1rem;left:-1rem;width:3rem;height:3rem;background:var(--accent);border-radius:.75rem;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:var(--shadow-accent);}
+.transparency-card .top-icon svg{width:1.5rem;height:1.5rem;}
+.transparency-card h3{font-size:1.25rem;font-weight:700;margin-bottom:1.5rem;margin-top:1.5rem;color:var(--accent);}
+.transparency-card p{color:var(--text-sec);line-height:1.7;margin-bottom:1.5rem;}
+.transparency-card .trust-badge{display:flex;align-items:center;gap:.5rem;color:var(--accent-sec);font-size:.875rem;font-weight:700;}
+.transparency-card .trust-badge svg{width:1.25rem;height:1.25rem;}
+ 
+/* ════════════════════════════════
+   PROCESS
+════════════════════════════════ */
+.process{padding:6rem 0;background:#fff;}
+.timeline{max-width:48rem;margin:0 auto;position:relative;}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(0,0,0,.1);transform:translateX(-50%);}
+@media(max-width:640px){.timeline::before{display:none;}}
+.tl-item{display:flex;flex-direction:column;margin-bottom:4rem;}
+.tl-item:nth-child(odd){align-items:flex-end;}
+.tl-item:nth-child(even){align-items:flex-start;}
+.tl-card{width:46%;position:relative;padding:1.5rem;background:var(--bg-secondary);}
+.tl-item:nth-child(odd) .tl-card{padding-right:1.5rem;}
+.tl-item:nth-child(even) .tl-card{padding-left:1.5rem;}
+.tl-day{font-size:.75rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;}
+.tl-card h3{font-size:1.125rem;font-weight:700;margin-bottom:.75rem;}
+.tl-card p{color:var(--text-sec);font-size:.875rem;line-height:1.6;}
+.tl-dot{position:absolute;top:50%;transform:translateY(-50%);width:1rem;height:1rem;border-radius:50%;background:var(--accent);border:3px solid #fff;}
+.tl-item:nth-child(odd) .tl-dot{right:-2.7rem;}
+.tl-item:nth-child(even) .tl-dot{left:-2.7rem;}
+@media(max-width:640px){
+  .tl-item,.tl-item:nth-child(odd),.tl-item:nth-child(even){align-items:stretch;}
+  .tl-card,.tl-item:nth-child(odd) .tl-card,.tl-item:nth-child(even) .tl-card{width:100%;padding:1.5rem;}
+  .tl-dot{display:none;}
+}
+ 
+/* ════════════════════════════════
+   CASES
+════════════════════════════════ */
+.cases{padding:6rem 0;background:var(--bg-secondary);}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:4rem;}
+@media(max-width:640px){.stats-grid{grid-template-columns:repeat(2,1fr);}}
+.stat-card{padding:1.5rem;text-align:center;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.stat-val{font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800;color:var(--accent);}
+.stat-label{font-size:.625rem;color:var(--text-sec);text-transform:uppercase;letter-spacing:.1em;margin-top:.25rem;}
+.cases-scroll{display:flex;overflow-x:auto;gap:1.5rem;padding-bottom:3rem;scroll-snap-type:x mandatory;scrollbar-width:none;}
+.cases-scroll::-webkit-scrollbar{display:none;}
+.case-card{min-width:320px;flex-shrink:0;scroll-snap-align:center;overflow:hidden;background:#fff;box-shadow:0 4px 20px rgba(0,0,0,.08);}
+.case-card:hover{transform:translateY(-6px);}
+.case-thumb{height:12rem;display:flex;align-items:center;justify-content:center;position:relative;}
+.case-thumb svg{width:3rem;height:3rem;opacity:.2;color:var(--accent);}
+.case-thumb-overlay{position:absolute;inset:0;background:linear-gradient(to top,#fff,transparent);opacity:.4;}
+.case-badge{position:absolute;bottom:1rem;left:1rem;background:var(--accent);color:#fff;font-size:.625rem;font-weight:800;padding:.25rem .5rem;border-radius:.25rem;text-transform:uppercase;letter-spacing:.08em;}
+.case-body{padding:1.5rem;}
+.case-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;}
+.case-row.divider{border-bottom:1px solid rgba(0,0,0,.05);}
+.case-row .lbl{font-size:.75rem;color:var(--text-sec);}
+.case-row .was{font-size:.875rem;font-weight:500;color:rgba(36,36,36,.3);text-decoration:line-through;}
+.case-row .now{font-size:.875rem;font-weight:700;color:var(--success);}
+.case-extra{background:var(--bg-secondary);border-radius:.5rem;padding:.75rem;text-align:center;margin-top:1rem;font-size:.75rem;font-weight:600;color:var(--accent);}
+.scroll-hint{display:flex;justify-content:center;align-items:center;gap:.5rem;margin-top:.5rem;}
+.scroll-bar{width:3rem;height:3px;background:rgba(72,17,115,.15);border-radius:9999px;overflow:hidden;}
+.scroll-progress{height:100%;background:var(--accent);border-radius:9999px;animation:scrollBar 3s linear infinite;}
+@keyframes scrollBar{from{transform:translateX(-100%);}to{transform:translateX(100%);}}
+.scroll-hint span{font-size:.625rem;color:var(--text-sec);text-transform:uppercase;letter-spacing:.1em;font-weight:700;}
+ 
+/* ════════════════════════════════
+   ABOUT
+════════════════════════════════ */
+.about{padding:6rem 0;}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+@media(max-width:768px){.about-grid{grid-template-columns:1fr;}}
+.about-photo-wrap{position:relative;}
+.about-photo{aspect-ratio:1/1;border-radius:1.5rem;overflow:hidden;border:2px solid rgba(72,17,115,.2);position:relative;z-index:1;}
+.about-photo img{width:100%;height:100%;object-fit:cover;}
+.about-glow{position:absolute;inset:-1rem;background:rgba(72,17,115,.08);filter:blur(2rem);border-radius:50%;z-index:0;}
+.about-award{position:absolute;bottom:-1.5rem;right:-1.5rem;padding:1.5rem;z-index:20;display:flex;align-items:center;gap:1rem;}
+.about-award-icon{width:3rem;height:3rem;border-radius:50%;background:rgba(72,17,115,.15);display:flex;align-items:center;justify-content:center;color:var(--accent);}
+.about-award-icon svg{width:1.5rem;height:1.5rem;}
+.about h2{font-size:2.5rem;font-weight:800;margin-bottom:2rem;}
+.about-text{display:flex;flex-direction:column;gap:1.25rem;color:var(--text-sec);line-height:1.7;margin-bottom:2.5rem;}
+.about-text .name{color:var(--text-main);font-weight:700;font-size:1.25rem;}
+.about-text .highlight{color:var(--accent);font-weight:700;}
+.about-tags{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+.about-tag{display:flex;align-items:center;gap:.75rem;background:var(--bg-secondary);padding:.75rem;border-radius:.75rem;border:1px solid rgba(0,0,0,.05);}
+.about-tag svg{width:1rem;height:1rem;color:var(--accent);}
+.about-tag span{font-size:.75rem;font-weight:700;color:rgba(36,36,36,.8);}
+ 
+/* ════════════════════════════════
+   PRICING — 3 COLUMNS
+════════════════════════════════ */
+.pricing{padding:6rem 0;background:rgba(246,246,249,.5);}
+.pricing-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:0;
+  border:1px solid rgba(0,0,0,.07);
+  border-radius:1.75rem;
+  overflow:hidden;
+  box-shadow:0 4px 30px rgba(0,0,0,.07);
+}
+@media(max-width:900px){.pricing-grid{grid-template-columns:1fr;}}
+.pricing-col{
+  padding:2.5rem 2rem;
+  border-radius:0;
+  border:none;
+  box-shadow:none;
+  border-right:1px solid rgba(0,0,0,.07);
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  background:#fff;
+  transition:none;
+}
+.pricing-col:hover{transform:none;box-shadow:none;}
+.pricing-col:last-child{border-right:none;}
+.pricing-col--featured{
+  background:var(--accent);
+  border-right:none;
+  border-left:none;
+}
+.pricing-ribbon-v2{
+  position:absolute;
+  top:1rem;right:1rem;
+  background:rgba(255,255,255,.25);
+  color:#fff;
+  font-size:.6rem;font-weight:800;
+  padding:.3rem .75rem;
+  border-radius:9999px;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  border:1px solid rgba(255,255,255,.3);
+}
+.pc-head{margin-bottom:1.5rem;}
+.pc-tag{
+  display:inline-block;
+  background:rgba(72,17,115,.08);
+  color:var(--accent);
+  font-size:.65rem;font-weight:800;
+  padding:.25rem .75rem;
+  border-radius:9999px;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  margin-bottom:.75rem;
+}
+.pc-tag--white{background:rgba(255,255,255,.2);color:#fff;}
+.pc-tag--gold{background:rgba(255,200,0,.15);color:#b8860b;}
+.pc-title{
+  font-size:1.375rem;font-weight:800;
+  letter-spacing:-.02em;
+  margin-bottom:.5rem;
+  color:var(--text-main);
+}
+.pricing-col--featured .pc-title{color:#fff;}
+.pc-sub{font-size:.8125rem;color:var(--text-sec);font-weight:500;line-height:1.5;}
+.pricing-col--featured .pc-sub{color:rgba(255,255,255,.7);}
+.pc-price-wrap{margin-bottom:1.75rem;padding-bottom:1.75rem;border-bottom:1px solid rgba(0,0,0,.06);}
+.pricing-col--featured .pc-price-wrap{border-bottom-color:rgba(255,255,255,.15);}
+.pc-old{display:block;font-size:.875rem;color:rgba(0,0,0,.3);text-decoration:line-through;margin-bottom:.25rem;font-weight:500;}
+.pc-price{font-size:2rem;font-weight:800;color:var(--accent);line-height:1.1;margin-bottom:.4rem;}
+.pricing-col--featured .pc-price{color:#fff;}
+.pc-cur{font-size:1rem;font-weight:600;}
+.pc-special{font-size:.72rem;color:var(--accent-sec);font-weight:700;background:rgba(203,17,171,.08);padding:.2rem .6rem;border-radius:.5rem;display:inline-block;}
+.pricing-col--featured .pc-special{background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);}
+.pc-list{list-style:none;display:flex;flex-direction:column;gap:.75rem;margin-bottom:2rem;flex:1;}
+.pc-list li{display:flex;align-items:flex-start;gap:.6rem;font-size:.8125rem;color:rgba(36,36,36,.8);font-weight:500;line-height:1.5;}
+.pricing-col--featured .pc-list li{color:rgba(255,255,255,.85);}
+.pc-check{color:var(--success);font-size:.75rem;font-weight:900;flex-shrink:0;margin-top:.15rem;}
+.pc-check--gold{color:#d4a017;}
+.pricing-col--featured .pc-check{color:rgba(255,255,255,.6);}
+.pc-btn{width:100%;display:flex;margin-top:auto;border-radius:.875rem;justify-content:center;font-size:.9375rem;}
+.pricing-col--featured .pc-btn{background:rgba(255,255,255,.2);color:#fff;border-color:rgba(255,255,255,.4);}
+.pricing-col--featured .pc-btn:hover{background:rgba(255,255,255,.3);}
+.pc-note{font-size:.65rem;color:rgba(255,255,255,.5);margin-top:1rem;line-height:1.5;text-align:center;}
+ 
+/* ════════════════════════════════
+   FAQ
+════════════════════════════════ */
+.faq{padding:6rem 0;}
+.faq-wrap{max-width:56rem;margin:0 auto;}
+.faq-card{padding:2rem 3rem;background:#fff;box-shadow:0 4px 30px rgba(0,0,0,.08);}
+.faq-item{border-bottom:1px solid rgba(0,0,0,.05);}
+.faq-item:last-child{border-bottom:none;}
+.faq-btn{width:100%;padding:1.5rem 0;display:flex;justify-content:space-between;align-items:center;background:none;border:none;cursor:pointer;text-align:left;gap:2rem;}
+.faq-btn h3{font-size:1.0625rem;font-weight:600;color:var(--text-main);transition:color .2s;font-family:'Manrope',sans-serif;}
+.faq-btn:hover h3{color:var(--accent);}
+.faq-arrow{width:1.25rem;height:1.25rem;color:var(--accent);flex-shrink:0;transition:transform .3s;}
+.faq-arrow.open{transform:rotate(180deg);}
+.faq-body{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease;}
+.faq-body.open{max-height:500px;padding-bottom:1.5rem;}
+.faq-body p{color:var(--text-sec);line-height:1.8;white-space:pre-line;}
+ 
+/* ════════════════════════════════
+   CONTACT
+════════════════════════════════ */
+.contact{padding:6rem 0;}
+.contact-card{max-width:56rem;margin:0 auto;padding:4rem;text-align:center;}
+.contact-card h2{font-size:clamp(2rem,4vw,3rem);font-weight:800;margin-bottom:1.5rem;}
+.contact-card .sub{color:var(--text-sec);font-size:1.125rem;margin-bottom:3rem;}
+.contact-form{max-width:32rem;margin:0 auto;text-align:left;}
+.form-group{margin-bottom:1.5rem;}
+.form-label{display:block;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-sec);margin-bottom:.5rem;margin-left:.5rem;}
+.form-input{width:100%;background:var(--bg-secondary);border:1px solid rgba(0,0,0,.05);border-radius:1rem;padding:1rem 1.5rem;font-family:'Manrope',sans-serif;font-size:1rem;color:var(--text-main);transition:border-color .2s;outline:none;}
+.form-input:focus{border-color:var(--accent);}
+.form-note{text-align:center;font-size:.75rem;color:var(--text-sec);margin-top:1.5rem;}
+ 
+/* ════════════════════════════════
+   FOOTER
+════════════════════════════════ */
+footer{padding:3rem 0;background:var(--bg-secondary);border-top:1px solid rgba(0,0,0,.05);}
+.footer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3rem;margin-bottom:3rem;}
+@media(max-width:640px){.footer-grid{grid-template-columns:1fr;gap:2rem;}}
+.footer-brand p{font-size:.875rem;color:var(--text-sec);line-height:1.7;margin-top:1rem;}
+.footer-heading{font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(0,0,0,.2);margin-bottom:1rem;}
+.footer-links-list{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;}
+.footer-links-list a{font-size:.875rem;color:var(--text-sec);transition:color .2s;}
+.footer-links-list a:hover{color:var(--accent);}
+.footer-contact-list{display:flex;flex-direction:column;gap:.75rem;}
+.footer-contact-list a{display:flex;align-items:center;gap:.75rem;font-size:.875rem;color:var(--text-sec);transition:color .2s;}
+.footer-contact-list a:hover{color:var(--accent);}
+.footer-contact-list svg{width:1rem;height:1rem;}
+.footer-bottom{padding-top:2rem;border-top:1px solid rgba(0,0,0,.05);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-copy{font-size:.625rem;color:rgba(0,0,0,.2);text-transform:uppercase;letter-spacing:.1em;}
+.footer-policy{font-size:.625rem;color:rgba(0,0,0,.2);text-transform:uppercase;letter-spacing:.1em;transition:color .2s;}
+.footer-policy:hover{color:var(--accent);}
+ 
+/* ── FADE-IN ── */
+.fade{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+.fade.visible{opacity:1;transform:translateY(0);}
+.fade-left{opacity:0;transform:translateX(-40px);transition:opacity .8s ease,transform .8s ease;}
+.fade-left.visible{opacity:1;transform:translateX(0);}
+.fade-right{opacity:0;transform:translateX(40px);transition:opacity .8s ease,transform .8s ease;}
+.fade-right.visible{opacity:1;transform:translateX(0);}
+.d1{transition-delay:.1s;} .d2{transition-delay:.2s;} .d3{transition-delay:.3s;}
+.d4{transition-delay:.4s;} .d5{transition-delay:.5s;}
+ 
+svg{display:inline-block;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+</style>
 </head>
 <body>
-
-  <!-- NAV -->
-  <nav id="nav">
-    <div class="nav-i">
-      <div class="nav-logo">
-        <span class="acc">Юлия</span>
-        <div class="vl"></div>
-        <span class="sub">Таргет для<br>маркетплейсов</span>
-      </div>
-      <div class="nav-links">
-        <a href="#услуги">Услуги</a>
-        <a href="#кейсы">Кейсы</a>
-        <a href="#тарифы">Тарифы</a>
-      </div>
-      <div class="nav-cta-w">
-        <a href="#contact" class="nav-cta">Получить<br>консультацию</a>
-      </div>
-      <button class="ham" id="ham">☰</button>
+ 
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <span class="acc">Юлия</span>
+      <div class="sep-line"></div>
+      <span class="sub">Таргет для<br>маркетплейсов</span>
     </div>
-    <div class="mob-nav" id="mob">
-      <a href="#услуги" onclick="closeMob()">Услуги</a>
-      <a href="#кейсы" onclick="closeMob()">Кейсы</a>
-      <a href="#тарифы" onclick="closeMob()">Тарифы</a>
-      <a href="#contact" onclick="closeMob()" class="btn" style="text-align:center;margin-top:.5rem;">Получить консультацию</a>
+    <div class="nav-links">
+      <a href="#услуги">Услуги</a>
+      <a href="#кейсы">Кейсы</a>
+      <a href="#тарифы">Тарифы</a>
     </div>
-  </nav>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="wrap">
-      <div class="fade-l">
-        <div class="hero-badge">⚡ Топ-эксперт по трафику для WB & Ozon</div>
-        <h1>Увеличьте продажи <span class="acc">в 2-3 раза</span>. Приведу целевых покупателей на Wildberries и Ozon</h1>
-        <p class="hero-desc">Привожу покупателей, которые уже ищут ваш товар. Работаю прозрачно в вашем кабинете — вы видите каждый рубль.</p>
-
-        <div class="hero-checks">
-          <div class="hc"><div class="hc-icon"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2.5"/></svg></div><span>Работала с десятками ниш — знаю, что продаёт и как это упаковать.</span></div>
-          <div class="hc"><div class="hc-icon"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2.5"/></svg></div><span>Реклама на выкуп — настраиваю на реальные заказы, а не просто клики.</span></div>
-          <div class="hc"><div class="hc-icon"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2.5"/></svg></div><span>Полная прозрачность — вы видите все объявления и статистику в вашем кабинете.</span></div>
-        </div>
-
-        <div class="card ac fade d2" style="border-radius:1.25rem;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
-            <div class="ac-dots">
+    <div class="nav-cta-wrap">
+      <a href="#contact" class="nav-cta">Получить<br>консультацию</a>
+    </div>
+    <button class="hamburger" id="hamburger">☰</button>
+  </div>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="#услуги" onclick="closeMob()">Услуги</a>
+    <a href="#кейсы" onclick="closeMob()">Кейсы</a>
+    <a href="#тарифы" onclick="closeMob()">Тарифы</a>
+    <a href="#contact" onclick="closeMob()" class="btn-primary" style="text-align:center;margin-top:.5rem;">Получить консультацию</a>
+  </div>
+</nav>
+ 
+<!-- HERO -->
+<section class="hero section-glow">
+  <div class="container">
+    <div class="hero-col fade-left">
+      <div class="hero-badge">
+        <svg width="12" height="12" style="fill:var(--accent-sec);stroke:none;"><polygon points="6,1 7.8,4.5 12,5.2 9,8.1 9.7,12 6,10.1 2.3,12 3,8.1 0,5.2 4.2,4.5"/></svg>
+        Топ-эксперт по трафику для WB &amp; Ozon
+      </div>
+      <h1>Увеличьте продажи <br><span class="acc">в 2-3 раза</span> за счет <br>системного трафика</h1>
+      <p class="hero-desc">Запускаю рекламу, которая приносит реальные заказы и выкупы. Работаем прозрачно в вашем кабинете.</p>
+      <div class="hero-checks">
+        <div class="hero-check"><div class="hero-check-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2.5" stroke-width="1.5"/></svg></div><span>Гарантированный целевой трафик на карточку</span></div>
+        <div class="hero-check"><div class="hero-check-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2.5" stroke-width="1.5"/></svg></div><span>Снижение стоимости привлечения клиента (CAC)</span></div>
+        <div class="hero-check"><div class="hero-check-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2.5" stroke-width="1.5"/></svg></div><span>Полная прозрачность: вы видите каждый рубль</span></div>
+      </div>
+ 
+      <div class="analytics-wrap glass-card analytics-card fade d2">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;">
+            <div class="analytics-dots">
               <span style="background:rgba(239,68,68,.3);"></span>
               <span style="background:rgba(234,179,8,.3);"></span>
               <span style="background:rgba(34,197,94,.3);"></span>
             </div>
-            <span class="ac-lbl">Analytics_Live</span>
+            <span class="analytics-label">Analytics_Live</span>
           </div>
-          <div class="bars" id="bars"></div>
-          <div class="ac-grid">
-            <div class="ac-cell"><div class="lbl">Заказы</div><div class="val g">+145% ↑</div></div>
-            <div class="ac-cell"><div class="lbl">ROI</div><div class="val p">420%</div></div>
-            <div class="ac-cell"><div class="lbl">Выкупы</div><div class="val m">89%</div></div>
-            <div class="ac-cell"><div class="lbl">Цена клика</div><div class="val g">от 2.5 ₽</div></div>
+          <div class="chart-bars" id="chartBars"></div>
+          <div class="analytics-grid">
+            <div class="analytics-cell">
+              <div class="cell-label">Заказы</div>
+              <div class="cell-val green">+145% ↑</div>
+            </div>
+            <div class="analytics-cell">
+              <div class="cell-label">ROI</div>
+              <div class="cell-val purple">420%</div>
+            </div>
+            <div class="analytics-cell">
+              <div class="cell-label">Выкупы</div>
+              <div class="cell-val" style="color:var(--accent-sec);">89%</div>
+            </div>
+            <div class="analytics-cell">
+              <div class="cell-label">Цена клика</div>
+              <div class="cell-val green">от 2.5 ₽</div>
+            </div>
           </div>
-        </div>
-
-        <div class="hero-cta" style="margin-top:2rem;">
-          <a href="#contact" class="btn">Увеличить продажи сейчас →</a>
-          <p class="hero-note">Бесплатный аудит вашей карточки перед запуском</p>
-        </div>
+          <div class="analytics-glow"></div>
       </div>
-    </div>
-  </section>
-
-  <!-- PAIN -->
-  <section class="pain">
-    <div class="wrap">
-      <h2 class="sec-title fade">Знакомая ситуация?</h2>
-      <p class="sec-sub fade d1">Большинство селлеров сливают бюджет именно здесь</p>
-      <div class="pain-grid">
-        <div class="card pain-card fade d1"><div class="ico">💸</div><h3>Деньги тратятся, продаж нет</h3><p>Запустили рекламу, клики идут — а заказов в кабинете не прибавляется.</p></div>
-        <div class="card pain-card fade d2"><div class="ico">🎯</div><h3>Не понимаю, кто мой покупатель</h3><p>Показываем рекламу всем подряд вместо тех, кто реально готов купить. В итоге — высокий CPC и нулевой ROI.</p></div>
-        <div class="card pain-card fade d3"><div class="ico">🔄</div><h3>Смотрят — но не возвращаются</h3><p>Человек зашёл на карточку, ушёл и забыл. Без ретаргетинга вы теряете до 70% потенциальных продаж.</p></div>
-        <div class="card pain-card fade d1"><div class="ico">📊</div><h3>Хаос в аналитике</h3><p>CTR, CPM, CPC — цифры есть, но нет понимания как на них влиять.</p></div>
-        <div class="card pain-card fade d2"><div class="ico">⚙️</div><h3>Нет работающих связок</h3><p>Хаотичные запуски без тестирования гипотез. Вы не знаете, какой креатив реально приносит деньги.</p></div>
-        <div class="card pain-card fade d3"><div class="ico">🔒</div><h3>Страх слить бюджет снова</h3><p>Уже был негативный опыт с внешней рекламой. Хочется уверенности и прозрачности.</p></div>
-      </div>
-      <div class="pain-bottom fade">Всё это — <span class="u">решается</span>. Если реклама сделана правильно.</div>
-    </div>
-  </section>
-
-  <!-- SOLUTION -->
-  <section class="solution" id="услуги">
-    <div class="wrap">
-      <h2 class="sec-title fade">Мой подход — это <span style="color:var(--accent)">система</span>, а не просто клики</h2>
-      <p style="color:var(--muted);text-align:center;max-width:42rem;margin:0 auto 3rem;font-size:1.125rem;" class="fade d1">Я запускаю рекламу так, чтобы каждый рубль рекламного бюджета шёл только на целевой трафик и работал на прибыль.</p>
-      <div class="quote-card fade d2">
-        <p>Прежде чем запустить первое объявление, я провожу глубокий аудит: товар, ниша, конкуренты и отзывы.</p>
-      </div>
-      <div class="sol-grid">
-        <div class="sol-item fade d1"><div class="sol-ico"><svg width="24" height="24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg></div><h3>Точная стратегия</h3><p>Анализирую воронку продаж. Определяю, какие сегменты аудитории принесут самый дешёвый заказ.</p></div>
-        <div class="sol-item fade d2"><div class="sol-ico"><svg width="24" height="24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg></div><h3>А/Б Тестирование</h3><p>Запускаю десятки гипотез. Нахожу те самые макеты и тексты, которые цепляют вашего покупателя.</p></div>
-        <div class="sol-item fade d3"><div class="sol-ico"><svg width="24" height="24"><circle cx="8" cy="21" r="2"/><circle cx="20" cy="21" r="2"/><path d="M5.67 6H23l-1.68 8.39a2 2 0 01-2 1.61H8.75a2 2 0 01-2-1.74L5.23 2.74A2 2 0 003.25 1H1"/></svg></div><h3>Фокус на выкуп</h3><p>Цель — не просто переход, а покупка. Оптимизирую кампании под реальные продажи на маркетплейсе.</p></div>
-        <div class="sol-item fade d4"><div class="sol-ico"><svg width="24" height="24"><polyline points="23,6 13.5,15.5 8.5,10.5 1,18"/><polyline points="17,6 23,6 23,12"/></svg></div><h3>Масштабирование</h3><p>Когда связка найдена — плавно увеличиваем бюджет, сохраняя стоимость заказа и окупаемость.</p></div>
-        <div class="sol-item fade d5"><div class="sol-ico"><svg width="24" height="24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><h3>Разные подходы к сегментам ЦА</h3><p>После анализа разбиваю аудиторию на сегменты и к каждому подхожу с разных сторон.</p></div>
-        <div class="sol-item fade d5"><div class="sol-ico"><svg width="24" height="24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div><h3>Перенимаю опыт великих</h3><p>Опираюсь на лучшие практики мирового маркетинга (Огилви, Nike) и адаптирую под ваш проект.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- INCLUDED -->
-  <section class="included">
-    <div class="wrap inc-grid">
-      <div class="fade-l">
-        <h2>Что входит в работу</h2>
-        <p class="sub">Полный цикл — от стратегии до отчётов.</p>
-        <div class="chk-grid">
-          <div class="chk"><svg width="20" height="20"><polyline points="20,6 9,17 4,12"/></svg><span>Разработка рекламной стратегии</span></div>
-          <div class="chk"><svg width="20" height="20"><polyline points="20,6 9,17 4,12"/></svg><span>Анализ аудитории и конкурентов</span></div>
-          <div class="chk"><svg width="20" height="20"><polyline points="20,6 9,17 4,12"/></svg><span>Написание рекламных текстов</span></div>
-          <div class="chk"><svg width="20" height="20"><polyline points="20,6 9,17 4,12"/></svg><span>Создание рекламных макетов</span></div>
-          <div class="chk"><svg width="20" height="20"><polyline points="20,6 9,17 4,12"/></svg><span>Настройка и запуск кампаний</span></div>
-          <div class="chk"><svg width="20" height="20"><polyline points="20,6 9,17 4,12"/></svg><span>Ретаргетинг на покупателей</span></div>
-          <div class="chk"><svg width="20" height="20"><polyline points="20,6 9,17 4,12"/></svg><span>Ежедневная оптимизация</span></div>
-          <div class="chk"><svg width="20" height="20"><polyline points="20,6 9,17 4,12"/></svg><span>Регулярные понятные отчёты</span></div>
-        </div>
-      </div>
-      <div class="fade-r">
-        <div class="card trans-card">
-          <div class="trans-ico"><svg width="24" height="24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <h3>Прозрачность на 100%</h3>
-          <p>Всё работает в <strong>ВАШЕМ</strong> рекламном кабинете ВКонтакте. Вы видите все запущенные объявления, количество переходов и стоимость каждого клика 24/7. Никаких скрытых операций.</p>
-          <div class="trust-b"><svg width="20" height="20"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9,12 11,14 15,10"/></svg> Ваш бюджет под вашим контролем</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROCESS -->
-  <section class="process">
-    <div class="wrap">
-      <h2 class="sec-title fade">Как мы придём к результату</h2>
-      <p class="sec-sub fade d1">Прозрачный процесс работы без лишних вопросов</p>
-      <div class="timeline">
-        <div class="tl-item fade d1"><div class="tl-card"><div class="tl-day">День 1-3</div><h3>АНАЛИЗ И ОФФЕРЫ</h3><p>Глубокий анализ товара. Создаём «убойные» офферы и креативы. Пишем тексты, которые бьют точно в боли вашей ЦА.</p><div class="tl-dot"></div></div></div>
-        <div class="tl-item fade d2"><div class="tl-card"><div class="tl-day">День 4-5</div><h3>МАКЕТЫ</h3><p>Создаём рекламные макеты, на которые хочется нажать — аудитория видит то, что искала.</p><div class="tl-dot"></div></div></div>
-        <div class="tl-item fade d3"><div class="tl-card"><div class="tl-day">День 5</div><h3>ЗАПУСК</h3><p>Запускаем первые кампании. Находим рабочие связки с минимальными затратами.</p><div class="tl-dot"></div></div></div>
-        <div class="tl-item fade d4"><div class="tl-card"><div class="tl-day">День 6-30</div><h3>МАСШТАБИРОВАНИЕ</h3><p>Ежедневная оптимизация. Отключаем лишнее, усиливаем то, что приносит выкупы.</p><div class="tl-dot"></div></div></div>
-        <div class="tl-item fade d5"><div class="tl-card"><div class="tl-day">Еженедельно</div><h3>ОТЧЁТНОСТЬ</h3><p>Понятные отчёты в цифрах: сколько потратили, какие показатели, что сделано.</p><div class="tl-dot"></div></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CASES -->
-  <section class="cases" id="кейсы">
-    <div class="wrap">
-      <h2 class="sec-title fade">Результаты, которые говорят сами за себя</h2>
-      <p class="sec-sub fade d1">Реальные кейсы из кабинетов моих клиентов</p>
-      <div class="stats-grid">
-        <div class="stat-card fade d1"><div class="stat-val">5</div><div class="stat-label">лет опыта</div></div>
-        <div class="stat-card fade d2"><div class="stat-val">50+</div><div class="stat-label">ниш в работе</div></div>
-        <div class="stat-card fade d3"><div class="stat-val">8.2%</div><div class="stat-label">лучший CTR</div></div>
-        <div class="stat-card fade d4"><div class="stat-val">от 1.3 ₽</div><div class="stat-label">цена клика</div></div>
-      </div>
-      <div class="cp-grid">
-        <div class="cp fade d1">
-          <div class="cp-head"><div class="cp-tag">Корм для собак 🐶</div></div>
-          <div class="cp-body"><p>Получили более <strong>3 000 переходов</strong> по <strong>2.5 ₽</strong> на карточку товара — целевые владельцы собак.</p></div>
-        </div>
-        <div class="cp fade d2">
-          <div class="cp-head"><div class="cp-tag">Капсулы для стирки 🧺</div></div>
-          <div class="cp-body"><p>Больше <strong>1 000 кликов по 3–5 ₽</strong>. Рекламировали сразу несколько товаров по цене бюджета одного артикула — в формате каталога.</p></div>
-        </div>
-        <div class="cp fade d3">
-          <div class="cp-head"><div class="cp-tag">Зарядка в авто 🔌</div></div>
-          <div class="cp-body"><p><strong>3 859 переходов по 3 ₽</strong> по целевым поисковым запросам.</p></div>
-        </div>
-        <div class="cp fade d4">
-          <div class="cp-head"><div class="cp-tag">Женские костюмы WB 👗</div></div>
-          <div class="cp-body"><p>Феноменальный <strong>CTR 13%</strong> по <strong>1.31 ₽</strong>. За один день всего на <strong>200 ₽ рекламного бюджета</strong> (данные на время обеда) — уже <strong>154 перехода</strong> по 1.33 ₽ целевых покупателей.</p></div>
-        </div>
-        <div class="cp fade d5">
-          <div class="cp-head"><div class="cp-tag">БАДы 💊</div></div>
-          <div class="cp-body"><p>Больше <strong>7 000 кликов по 1.62 ₽</strong>. Рекламировали сразу на двух маркетплейсах: <strong>WB и Ozon</strong>.</p></div>
-        </div>
-        <div class="cp fade d5">
-          <div class="cp-head"><div class="cp-tag">Компьютерные кресла 🪑</div></div>
-          <div class="cp-body"><p>Больше <strong>6 000 переходов по 2.74 ₽</strong> на карточки игровых премиум кресел стоимостью от <strong>25 000 ₽</strong> — сразу со скидками маркетплейса.</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section class="about" id="отзывы">
-    <div class="wrap about-grid">
-      <div class="photo-wrap fade-l">
-        <div class="photo-glow"></div>
-        <div class="photo-box"><img src="https://i.ibb.co/My31WtRg/IMG-0698.jpg" alt="Юлия" referrerpolicy="no-referrer" /></div>
-        <div class="award-chip">
-          <div class="award-ico"><svg width="24" height="24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
-          <div><div style="font-size:1.125rem;font-weight:700;">500+</div><div style="font-size:.625rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;">Успешных кампаний</div></div>
-        </div>
-      </div>
-      <div class="fade-r">
-        <h2>Почему селлеры выбирают меня</h2>
-        <div class="about-txt">
-          <p class="nm">Привет, я Юлия.</p>
-          <p>Уже 5 лет я помогаю селлерам на Wildberries и Ozon привлекать покупателей через таргетированную рекламу ВКонтакте.</p>
-          <p>За это время я запускала рекламу в десятках разных ниш — от товаров для дома до спортивного питания и детских товаров.</p>
-          <p>Я не просто «настраиваю рекламу». Я погружаюсь в ваш бизнес, изучаю товар и нахожу именно ту аудиторию, которая покупает — а не просто кликает.</p>
-          <p class="hl">Работаю только в вашем кабинете. Вы видите всё. Никаких скрытых схем.</p>
-        </div>
-        <div class="about-tags">
-          <div class="about-tag"><svg width="16" height="16"><circle cx="8" cy="5" r="4"/><path d="M10.477 9.89L11 16 8 14l-3 2 .523-6.11"/></svg><span>5 лет опыта</span></div>
-          <div class="about-tag"><svg width="16" height="16"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span>Специфика WB/Ozon</span></div>
-          <div class="about-tag"><svg width="16" height="16"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2.5"/></svg><span>Работа по стратегии</span></div>
-          <div class="about-tag"><svg width="16" height="16"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span>Всегда на связи</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- BRAND TEASER -->
-  <div class="brand-teaser">
-    <div class="wrap">
-      <div class="brand-teaser-card fade">
-        Для тех, кто развивает свой бренд, у меня есть особый формат: <strong>Сайт-гипноз</strong> и <strong>Воронка</strong>.&nbsp;&nbsp;<a href="#brand-details">Подробнее ↓</a>
+      
+      <div class="hero-cta-row" style="margin-top:2.5rem;">
+        <a href="#contact" class="btn-primary">Увеличить продажи сейчас <svg width="20" height="20"><line x1="5" y1="10" x2="15" y2="10"/><polyline points="11,6 15,10 11,14"/></svg></a>
+        <p class="hero-note">Бесплатный аудит вашей карточки перед запуском</p>
       </div>
     </div>
   </div>
-
-  <!-- PRICING -->
-  <section class="pricing" id="тарифы">
-    <div class="wrap">
-      <h2 class="sec-title fade">Стоимость работы</h2>
-      <p class="sec-sub fade d1">Прозрачные условия без скрытых платежей</p>
-      <div class="pr-grid">
-        <div class="pr-col fade d1">
-          <div class="pr-head">
-            <div class="pr-tag">Лендинг</div>
-            <h3 class="pr-title">САЙТ-ГИПНОЗ</h3>
-            <p class="pr-sub">Лендинг для товара/услуги</p>
-          </div>
-          <div class="pr-prices">
-            <span class="pr-old">15 000 руб.</span>
-            <div class="pr-price">12 500 <span class="pr-cur">руб.</span></div>
-            <span class="pr-special">спеццена для первых клиентов</span>
-          </div>
-          <ul class="pr-list">
-            <li><span class="pr-chk">✓</span> Готовый лендинг (одна страница)</li>
-            <li><span class="pr-chk">✓</span> Атмосфера бренда (цвет, свет, стиль)</li>
-            <li><span class="pr-chk">✓</span> Продающие тексты (смыслы, УТП)</li>
-            <li><span class="pr-chk">✓</span> Кнопка целевого действия</li>
-            <li><span class="pr-chk">✓</span> Адаптация под мобильные</li>
-            <li><span class="pr-chk">✓</span> 1 раунд правок</li>
-          </ul>
-          <a href="#contact" class="btn-out pr-btn">Заказать</a>
-        </div>
-        <div class="pr-col pr-feat fade d2">
-          <div class="pr-ribbon">Популярно</div>
-          <div class="pr-head">
-            <div class="pr-tag pr-tag-w">Трафик</div>
-            <h3 class="pr-title">РЕКЛАМА</h3>
-            <p class="pr-sub">Привлечение целевых покупателей</p>
-          </div>
-          <div class="pr-prices">
-            <div class="pr-price">20 000 <span class="pr-cur">руб./мес.</span></div>
-          </div>
-          <ul class="pr-list">
-            <li><span class="pr-chk">✓</span> Стратегия под ваш проект</li>
-            <li><span class="pr-chk">✓</span> Рекламные тексты с разными подходами</li>
-            <li><span class="pr-chk">✓</span> Рекламные макеты</li>
-            <li><span class="pr-chk">✓</span> Настройка рекламной кампании</li>
-            <li><span class="pr-chk">✓</span> Ежедневная оптимизация</li>
-            <li><span class="pr-chk">✓</span> Создание макетов и текстов</li>
-            <li><span class="pr-chk">✓</span> Работа с «горячей» аудиторией</li>
-            <li><span class="pr-chk">✓</span> Отчёт в конце периода</li>
-          </ul>
-          <a href="#contact" class="btn pr-btn" style="background:rgba(255,255,255,.2);box-shadow:none;border:1.5px solid rgba(255,255,255,.4);">Начать работу</a>
-          <p class="pr-note">* Рекламный бюджет оплачивается отдельно. Рекомендуем от 15 000 ₽/мес.</p>
-        </div>
-        <div class="pr-col fade d3">
-          <div class="pr-head">
-            <div class="pr-tag pr-tag-g">Выгодно</div>
-            <h3 class="pr-title">ВОРОНКА ПОД КЛЮЧ</h3>
-            <p class="pr-sub">Сайт-Гипноз + Месяц ведения</p>
-          </div>
-          <div class="pr-prices">
-            <span class="pr-old">35 000 руб.</span>
-            <div class="pr-price">30 000 <span class="pr-cur">руб.</span></div>
-            <span class="pr-special">спеццена для первых клиентов</span>
-          </div>
-          <ul class="pr-list">
-            <li><span class="pr-chk pr-chk-g">★</span> ВСЁ из пакета «Сайт-Гипноз»</li>
-            <li><span class="pr-chk pr-chk-g">★</span> ВСЁ из пакета «Реклама»</li>
-            <li><span class="pr-chk">✓</span> Связка «Сайт + Реклама»</li>
-            <li><span class="pr-chk">✓</span> Максимальная конверсия</li>
-            <li><span class="pr-chk">✓</span> Экономия бюджета</li>
-            <li><span class="pr-chk">✓</span> Персональный менеджер</li>
-          </ul>
-          <a href="#contact" class="btn-out pr-btn">Заказать</a>
-        </div>
-      </div>
+</section>
+ 
+<!-- PAIN POINTS -->
+<section class="pain">
+  <div class="container">
+    <h2 class="section-title fade">Знакомая ситуация?</h2>
+    <p class="section-sub fade d1">Большинство селлеров сливают бюджет именно здесь</p>
+    <div class="pain-grid">
+      <div class="glass-card pain-card fade d1"><div class="icon">💸</div><h3>Деньги тратятся, продаж нет</h3><p>Запустили рекламу, клики идут — а заказов в кабинете продавца не прибавляется.</p></div>
+      <div class="glass-card pain-card fade d2"><div class="icon">🎯</div><h3>Не понимаю, кто мой покупатель</h3><p>Показываем рекламу всем подряд вместо тех, кто реально готов купить. В итоге — высокий CPC и нулевой ROI.</p></div>
+      <div class="glass-card pain-card fade d3"><div class="icon">🔄</div><h3>Смотрят — но не возвращаются</h3><p>Человек зашёл на карточку, ушёл и забыл. Без ретаргетинга вы теряете до 70% потенциальных продаж.</p></div>
+      <div class="glass-card pain-card fade d1"><div class="icon">📊</div><h3>Хаос в аналитике</h3><p>CTR, CPM, CPC — цифры есть, но нет понимания как на них влиять.</p></div>
+      <div class="glass-card pain-card fade d2"><div class="icon">⚙️</div><h3>Нет работающих связок</h3><p>Хаотичные запуски без тестирования гипотез. Вы не знаете, какой креатив реально приносит деньги.</p></div>
+      <div class="glass-card pain-card fade d3"><div class="icon">🔒</div><h3>Страх слить бюджет снова</h3><p>Уже был негативный опыт с внешней рекламой. Хочется уверенности и прозрачности в каждом действии.</p></div>
     </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="faq" id="faq">
-    <div class="wrap faq-wrap">
-      <h2 class="sec-title fade">Отвечаю на частые вопросы</h2>
-      <div class="faq-card" id="faqList"></div>
+    <div class="pain-bottom fade">Всё это — <span class="u">решается</span>. Если реклама сделана правильно.</div>
+  </div>
+</section>
+ 
+<!-- SOLUTION -->
+<section class="solution section-glow" id="услуги">
+  <div class="container">
+    <h2 class="section-title fade">Мой подход — это <span style="color:var(--accent)">система</span>, а не просто клики</h2>
+    <p class="solution-intro fade d1">Я запускаю рекламу так, чтобы каждый рубль рекламного бюджета шел только на целевой трафик и работал на прибыль.</p>
+    <div class="glass-card quote-card fade d2">
+      <p>Прежде чем запустить первое объявление, я провожу глубокий аудит: товар, ниша, конкуренты и отзывы.<br><br><span class="acc">Реклама без стратегии — это благотворительность в пользу рекламных площадок.</span></p>
     </div>
-  </section>
-
-  <!-- BRAND DETAILS -->
-  <section id="brand-details">
-    <div class="wrap">
-      <div class="bd-inner">
-        <h2><span>Сайт-Гипноз и Воронка</span> — усиление для брендов</h2>
-        <p class="bd-text">Мои клиенты уже получают целевых покупателей. Это факт (кейсы — выше). Но есть особый формат для тех, кто развивает свой бренд: <strong>Сайт-Гипноз</strong> и <strong>Воронка под ключ</strong>.</p>
-        <div class="bd-steps">
-          <div class="bd-step"><div class="sn">Шаг 1</div><h4>Покупатель видит рекламу</h4><p>Таргет приводит именно тех, кто уже интересуется вашим товаром.</p></div>
-          <div class="bd-step"><div class="sn">Шаг 2</div><h4>Попадает на Сайт-Гипноз</h4><p>Видит вашу атмосферу, читает смыслы, влюбляется в товар — без конкурентов и отвлечений.</p></div>
-          <div class="bd-step"><div class="sn">Шаг 3</div><h4>Переходит на карточку</h4><p>Уже «подготовленный» покупатель — максимальная конверсия и выкуп. Премиум-уровень.</p></div>
-        </div>
-        <p class="bd-text">Представьте: покупатель переходит не сразу на WB/Ozon, а на отдельный сайт вашего товара. Без конкурентов. Без отвлечений. Максимальная конверсия.</p>
-        <a href="stories.html" class="btn" style="font-size:1.0625rem;padding:1.125rem 2.5rem;">Читать подробнее →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="contact" id="contact">
-    <div class="wrap">
-      <div class="card contact-card">
-        <h2>Давайте обсудим ваш товар</h2>
-        <p class="sub">Без скриптов продаж. Просто честный разговор о рекламе</p>
-        <div class="c-form">
-          <form action="https://formspree.io/f/xwvaaooa" method="POST">
-            <div class="fg"><label class="flbl">Ваше имя</label><input type="text" name="name" class="finp" placeholder="Иван" /></div>
-            <div class="fg"><label class="flbl">Телефон или Telegram</label><input type="text" name="phone" class="finp" placeholder="+7 (999) 000-00-00" /></div>
-            <div class="fg"><label class="flbl">Ссылка на товар (необязательно)</label><input type="text" name="link" class="finp" placeholder="wildberries.ru/catalog/..." /></div>
-            <button type="submit" class="btn" style="width:100%;margin-top:.5rem;">Написать Юлии ✉️</button>
-            <p class="fnote">Отвечу в рабочее время. Никакого спама — только по делу.</p>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRESTORY LINK -->
-  <div class="prestory">
-    <div class="wrap">
-      <p>📖 Не уверены, что Сайт-Гипноз — это для вас? <a href="stories.html">Прочитайте 6 историй</a>, когда он мог бы помочь →</p>
+    <div class="sol-grid">
+      <div class="sol-item fade d1"><div class="sol-icon"><svg width="24" height="24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="3" x2="12" y2="1"/><line x1="12" y1="23" x2="12" y2="21"/><line x1="3" y1="12" x2="1" y2="12"/><line x1="23" y1="12" x2="21" y2="12"/></svg></div><h3>Точная стратегия</h3><p>Анализирую воронку продаж. Определяю, какие сегменты аудитории принесут самый дешевый заказ.</p></div>
+      <div class="sol-item fade d2"><div class="sol-icon"><svg width="24" height="24"><rect x="2" y="7" width="20" height="14" rx="2"/><polyline points="16,7 12,3 8,7"/><line x1="12" y1="12" x2="12" y2="17"/><line x1="9" y1="15" x2="15" y2="15"/></svg></div><h3>А/Б Тестирование</h3><p>Запускаю десятки гипотез. Нахожу те самые макеты и тексты, которые 'цепляют' вашего покупателя.</p></div>
+      <div class="sol-item fade d3"><div class="sol-icon"><svg width="24" height="24"><circle cx="8" cy="21" r="2"/><circle cx="20" cy="21" r="2"/><path d="M5.67 6H23l-1.68 8.39a2 2 0 01-2 1.61H8.75a2 2 0 01-2-1.74L5.23 2.74A2 2 0 003.25 1H1"/></svg></div><h3>Фокус на выкуп</h3><p>Цель — не просто переход, а покупка. Оптимизирую кампании под реальные продажи на маркетплейсе.</p></div>
+      <div class="sol-item fade d4"><div class="sol-icon"><svg width="24" height="24"><polyline points="23,6 13.5,15.5 8.5,10.5 1,18"/><polyline points="17,6 23,6 23,12"/></svg></div><h3>Масштабирование</h3><p>Когда связка найдена — плавно увеличиваем бюджет, сохраняя стоимость заказа и окупаемость.</p></div>
     </div>
   </div>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="wrap">
-      <div class="foot-grid">
-        <div class="foot-brand">
-          <div class="nav-logo" style="padding:0;border:none;">
-            <span class="acc">Юлия</span>
-            <div class="vl" style="height:1.5rem;"></div>
-            <span class="sub">Таргет</span>
-          </div>
-          <p>Таргетированная реклама ВКонтакте для Wildberries и Ozon. Системный рост ваших продаж.</p>
-        </div>
-        <div>
-          <div class="foot-h">Навигация</div>
-          <div class="foot-links">
-            <a href="#услуги">Услуги</a><a href="#кейсы">Кейсы</a>
-            <a href="#тарифы">Тарифы</a><a href="#faq">FAQ</a>
-            <a href="#contact">Контакты</a>
-          </div>
-        </div>
-        <div>
-          <div class="foot-h">Контакты</div>
-          <div class="foot-contacts">
-            <a href="tel:89235703335"><svg width="16" height="16"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.65a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg> 8 (923) 570-33-35</a>
-            <a href="https://t.me/yulia2190"><svg width="16" height="16"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9"/></svg> Telegram</a>
-            <a href="https://max.ru/u/f9LHodD0cOKwE3KvdIfWy2TeHWoSRHqdSTeQpOGoGTx-Ee3wUvJmisKh5nc"><svg width="16" height="16"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> MAX</a>
-            <a href="https://vk.com/seonado_target" target="_blank"><svg width="16" height="16"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> ВКонтакте</a>
-          </div>
-        </div>
-      </div>
-      <div class="foot-bottom">
-        <span class="foot-copy">© 2020-2026 Юлия. Все права защищены.</span>
-        <a href="#" class="foot-policy">Политика конфиденциальности</a>
+</section>
+ 
+<!-- INCLUDED -->
+<section class="included">
+  <div class="container included-grid">
+    <div class="fade-left">
+      <h2>Что входит в работу</h2>
+      <p class="sub">Полный цикл — от стратегии до отчётов. Вам не нужно разбираться в рекламе.</p>
+      <div class="check-grid">
+        <div class="check-row"><svg width="20" height="20"><polyline points="20,6 9,17 4,12"/></svg><span>Разработка рекламной стратегии</span></div>
+        <div class="check-row"><svg width="20" height="20"><polyline points="20,6 9,17 4,12"/></svg><span>Анализ аудитории и конкурентов</span></div>
+        <div class="check-row"><svg width="20" height="20"><polyline points="20,6 9,17 4,12"/></svg><span>Написание рекламных текстов</span></div>
+        <div class="check-row"><svg width="20" height="20"><polyline points="20,6 9,17 4,12"/></svg><span>Создание рекламных макетов</span></div>
+        <div class="check-row"><svg width="20" height="20"><polyline points="20,6 9,17 4,12"/></svg><span>Настройка и запуск кампаний</span></div>
+        <div class="check-row"><svg width="20" height="20"><polyline points="20,6 9,17 4,12"/></svg><span>Ретаргетинг на покупателей</span></div>
+        <div class="check-row"><svg width="20" height="20"><polyline points="20,6 9,17 4,12"/></svg><span>Ежедневная оптимизация</span></div>
+        <div class="check-row"><svg width="20" height="20"><polyline points="20,6 9,17 4,12"/></svg><span>Регулярные понятные отчёты</span></div>
       </div>
     </div>
-  </footer>
-
-  <script>
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 50));
-
-    const ham = document.getElementById('ham');
-    const mob = document.getElementById('mob');
-    ham.addEventListener('click', () => { const o = mob.classList.toggle('open'); ham.textContent = o ? '✕' : '☰'; });
-    function closeMob() { mob.classList.remove('open'); ham.textContent = '☰'; }
-
-    const barsEl = document.getElementById('bars');
-    [40, 70, 45, 90, 65, 85, 55, 95, 75, 100].forEach((h, i) => {
+    <div class="fade-right">
+      <div class="glass-card transparency-card">
+        <div class="top-icon"><svg width="24" height="24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Прозрачность на 100%</h3>
+        <p>Всё работает в <strong>ВАШЕМ</strong> рекламном кабинете. Вы видите все запущенные объявления, количество переходов и стоимость каждого клика. Никаких скрытых операций. Полный контроль остаётся у вас.</p>
+        <div class="trust-badge"><svg width="20" height="20"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9,12 11,14 15,10"/></svg> Ваш бюджет под вашим контролем</div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- PROCESS -->
+<section class="process">
+  <div class="container">
+    <h2 class="section-title fade">Как мы придем к результату</h2>
+    <p class="section-sub fade d1">Прозрачный процесс работы без лишних вопросов</p>
+    <div class="timeline">
+      <div class="tl-item fade d1"><div class="tl-card glass-card"><div class="tl-day">День 1-3</div><h3>АНАЛИЗ И ОФФЕРЫ</h3><p>Глубокий анализ товара. Создаем 'убойные' офферы и креативы. Пишем тексты, которые бьют точно в боли вашей ЦА.</p><div class="tl-dot"></div></div></div>
+      <div class="tl-item fade d2"><div class="tl-card glass-card"><div class="tl-day">День 4-5</div><h3>МАКЕТЫ</h3><p>Создаем рекламные макеты, на которые хочется поскорее нажать, так как аудитория увидела то, что искала.</p><div class="tl-dot"></div></div></div>
+      <div class="tl-item fade d3"><div class="tl-card glass-card"><div class="tl-day">День 5</div><h3>ЗАПУСК</h3><p>Запускаем первые кампании. Находим рабочие связки с минимальными затратами.</p><div class="tl-dot"></div></div></div>
+      <div class="tl-item fade d4"><div class="tl-card glass-card"><div class="tl-day">День 6-30</div><h3>МАСШТАБИРОВАНИЕ</h3><p>Ежедневная оптимизация. Отключаем лишнее, усиливаем то, что приносит выкупы.</p><div class="tl-dot"></div></div></div>
+      <div class="tl-item fade d5"><div class="tl-card glass-card"><div class="tl-day">Еженедельно</div><h3>ОТЧЁТНОСТЬ</h3><p>Понятные отчеты в цифрах: сколько потратили, какие показатели, что было сделано.</p><div class="tl-dot"></div></div></div>
+    </div>
+  </div>
+</section>
+ 
+<!-- CASES -->
+<section class="cases section-glow" id="кейсы">
+  <div class="container">
+    <h2 class="section-title fade">Результаты, которые говорят сами за себя</h2>
+    <p class="section-sub fade d1">Реальные кейсы из кабинетов моих клиентов</p>
+    <div class="stats-grid">
+      <div class="glass-card stat-card fade d1"><div class="stat-val" data-counter="5" data-suffix="">5</div><div class="stat-label">лет опыта</div></div>
+      <div class="glass-card stat-card fade d2"><div class="stat-val" data-counter="50" data-suffix="+">50+</div><div class="stat-label">ниш в работе</div></div>
+      <div class="glass-card stat-card fade d3"><div class="stat-val" data-counter="8.2" data-suffix="%" data-float="1">8.2%</div><div class="stat-label">лучший CTR</div></div>
+      <div class="glass-card stat-card fade d4"><div class="stat-val" data-counter="2.5" data-suffix=" ₽" data-float="1">2.5 ₽</div><div class="stat-label">цена клика</div></div>
+    </div>
+    <div class="cases-scroll" id="casesScroll"></div>
+    <div class="scroll-hint"><div class="scroll-bar"><div class="scroll-progress"></div></div><span>Листайте вправо</span></div>
+  </div>
+</section>
+ 
+<!-- ABOUT -->
+<section class="about" id="отзывы">
+  <div class="container about-grid">
+    <div class="about-photo-wrap fade-left">
+      <div class="about-glow"></div>
+      <div class="about-photo"><img src="https://i.ibb.co/7NrFyQDp/IMG-7416.jpg" alt="Юлия" referrerpolicy="no-referrer"/></div>
+      <div class="glass-card about-award">
+        <div class="about-award-icon"><svg width="24" height="24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+        <div><div style="font-size:1.125rem;font-weight:700;">500+</div><div style="font-size:.625rem;color:var(--text-sec);text-transform:uppercase;letter-spacing:.1em;">Успешных кампаний</div></div>
+      </div>
+    </div>
+    <div class="fade-right">
+      <h2>Почему селлеры выбирают меня</h2>
+      <div class="about-text">
+        <p class="name">Привет, я Юлия.</p>
+        <p>Уже 5 лет я помогаю селлерам на Wildberries и Ozon привлекать покупателей через таргетированную рекламу ВКонтакте.</p>
+        <p>За это время я запускала рекламу в десятках разных ниш — от товаров для дома до спортивного питания и детских товаров.</p>
+        <p>Я не просто «настраиваю рекламу». Я погружаюсь в ваш бизнес, изучаю товар и нахожу именно ту аудиторию, которая покупает — а не просто кликает.</p>
+        <p class="highlight">Работаю только в вашем кабинете. Вы видите всё. Никаких скрытых схем.</p>
+      </div>
+      <div class="about-tags">
+        <div class="about-tag"><svg width="16" height="16"><circle cx="8" cy="5" r="4"/><path d="M10.477 9.89L11 16 8 14l-3 2 .523-6.11"/></svg><span>5 лет опыта</span></div>
+        <div class="about-tag"><svg width="16" height="16"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span>Специфика WB/Ozon</span></div>
+        <div class="about-tag"><svg width="16" height="16"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2.5"/></svg><span>Работа по стратегии</span></div>
+        <div class="about-tag"><svg width="16" height="16"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span>Всегда на связи</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- PRICING -->
+<section class="pricing section-glow" id="тарифы">
+  <div class="container">
+    <h2 class="section-title fade">Стоимость работы</h2>
+    <p class="section-sub fade d1">Прозрачные условия без скрытых платежей</p>
+    <div class="pricing-grid">
+ 
+      <!-- Колонка 1: САЙТ-ГИПНОЗ -->
+      <div class="glass-card pricing-col fade d1">
+        <div class="pc-head">
+          <div class="pc-tag">Лендинг</div>
+          <h3 class="pc-title">САЙТ-ГИПНОЗ</h3>
+          <p class="pc-sub">Продающий лендинг для товара/услуги</p>
+        </div>
+        <div class="pc-price-wrap">
+          <div class="pc-price">35 000 <span class="pc-cur">руб.</span></div>
+        </div>
+        <ul class="pc-list">
+          <li><span class="pc-check">✓</span> Продающая структура. Это не просто «красивая страница». Я выстраиваю логику от первого экрана до кнопки «купить», чтобы внимание клиента не распылялось, а само вело его к заказу.</li>
+          <li><span class="pc-check">✓</span> Тексты, которые говорят с клиентом на одном языке. Вместо штампов вроде «качество и надёжность» — живые аргументы: почему ваш товар особенный, из чего он сделан и какой результат дает.</li>
+          <li><span class="pc-check">✓</span> Дизайн в атмосфере бренда. Цвета, шрифты, визуал подбираются под ваш бренд, а не берутся из шаблона, чтобы вызывать нужные эмоции и ощущение премиальности.</li>
+          <li><span class="pc-check">✓</span> Закрытие возражений. Я сразу отвечаю на незаданные вопросы клиента о составе, безопасности и гарантиях, чтобы убирать сомнения и вести его к покупке.</li>
+          <li><span class="pc-check">✓</span> Адаптация под все устройства. Сайт будет корректно работать на смартфонах, планшетах и ПК.</li>
+          <li><span class="pc-check">✓</span> Базовая SEO-оптимизация. Сайт будет готов к продвижению в поисковиках с первого дня.</li>
+          <li><span class="pc-check">✓</span> Передача вам. Вы получаете полностью готовый сайт.</li>
+        </ul>
+        <a href="#contact" class="btn-secondary pc-btn">Заказать</a>
+      </div>
+ 
+      <!-- Колонка 2: РЕКЛАМА (выделенная) -->
+      <div class="glass-card pricing-col pricing-col--featured fade d2">
+        <div class="pricing-ribbon-v2">Популярно</div>
+        <div class="pc-head">
+          <div class="pc-tag pc-tag--white">Трафик</div>
+          <h3 class="pc-title">РЕКЛАМА</h3>
+          <p class="pc-sub">Привлечение целевых покупателей</p>
+        </div>
+        <div class="pc-price-wrap">
+          <div class="pc-price">20 000 <span class="pc-cur">руб./мес.</span></div>
+        </div>
+        <ul class="pc-list">
+          <li><span class="pc-check">✓</span> Стратегия под ваш проект</li>
+          <li><span class="pc-check">✓</span> Рекламные тексты с разными подходами</li>
+          <li><span class="pc-check">✓</span> Рекламные макеты</li>
+          <li><span class="pc-check">✓</span> Настройка рекламной кампании</li>
+          <li><span class="pc-check">✓</span> Ежедневная оптимизация</li>
+          <li><span class="pc-check">✓</span> Создание макетов и текстов</li>
+          <li><span class="pc-check">✓</span> Работа с «горячей» аудиторией</li>
+          <li><span class="pc-check">✓</span> Отчёт в конце периода</li>
+        </ul>
+        <a href="#contact" class="btn-primary pc-btn">Начать работу</a>
+        <p class="pc-note">* Рекламный бюджет оплачивается отдельно. Рекомендуем от 15 000 ₽/мес.</p>
+      </div>
+ 
+      <!-- Колонка 3: ВОРОНКА ПОД КЛЮЧ -->
+      <div class="glass-card pricing-col fade d3">
+        <div class="pc-head">
+          <div class="pc-tag pc-tag--gold">Выгодно</div>
+          <h3 class="pc-title">ВОРОНКА ПОД КЛЮЧ</h3>
+          <p class="pc-sub">Сайт-Гипноз + Месяц ведения</p>
+        </div>
+        <div class="pc-price-wrap">
+          <span class="pc-old">55 000 руб.</span>
+          <div class="pc-price">50 000 <span class="pc-cur">руб.</span></div>
+        </div>
+        <ul class="pc-list">
+          <li><span class="pc-check pc-check--gold">★</span> ВСЁ из пакета «Сайт-Гипноз»</li>
+          <li><span class="pc-check pc-check--gold">★</span> ВСЁ из пакета «Реклама»</li>
+          <li><span class="pc-check">✓</span> Связка «Сайт + Реклама»</li>
+          <li><span class="pc-check">✓</span> Максимальная конверсия</li>
+          <li><span class="pc-check">✓</span> Экономия бюджета</li>
+          <li><span class="pc-check">✓</span> Персональный менеджер</li>
+        </ul>
+        <a href="#contact" class="btn-secondary pc-btn">Заказать</a>
+      </div>
+ 
+    </div>
+  </div>
+</section>
+ 
+<!-- FAQ -->
+<section class="faq">
+  <div class="container faq-wrap">
+    <h2 class="section-title fade">Отвечаю на частые вопросы</h2>
+    <div class="glass-card faq-card fade d1" id="faqList"></div>
+  </div>
+</section>
+ 
+<!-- CONTACT -->
+<section class="contact section-glow" id="contact">
+  <div class="container">
+    <div class="glass-card contact-card fade">
+      <h2>Давайте обсудим ваш товар</h2>
+      <p class="sub">Без скриптов продаж. Просто честный разговор о рекламе</p>
+      <div class="contact-form">
+        <div class="form-group"><label class="form-label">Ваше имя</label><input type="text" class="form-input" placeholder="Иван"/></div>
+        <div class="form-group"><label class="form-label">Телефон или Telegram</label><input type="text" class="form-input" placeholder="+7 (999) 000-00-00"/></div>
+        <div class="form-group"><label class="form-label">Ссылка на товар (необязательно)</label><input type="text" class="form-input" placeholder="wildberries.ru/catalog/..."/></div>
+        <button class="btn-primary" style="width:100%;margin-top:.5rem;" onclick="handleSubmit(event)">Написать Юлии <svg width="20" height="20"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9"/></svg></button>
+        <p class="form-note">Отвечу в рабочее время. Никакого спама — только по делу.</p>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo" style="border-right:none;padding:0;"><span class="acc">Юлия</span><div class="sep-line" style="height:1.5rem;"></div><span class="sub">Таргет</span></div>
+        <p>Таргетированная реклама ВКонтакте<br>для Wildberries и Ozon. Системный рост<br>ваших продаж.</p>
+      </div>
+      <div>
+        <div class="footer-heading">Навигация</div>
+        <div class="footer-links-list">
+          <a href="#услуги">Услуги</a><a href="#кейсы">Кейсы</a>
+          <a href="#тарифы">Тарифы</a><a href="#faq">FAQ</a>
+          <a href="#contact">Контакты</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Контакты</div>
+        <div class="footer-contact-list">
+          <a href="tel:89235703335"><svg width="16" height="16"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.65a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg> 8 (923) 570-33-35</a>
+          <a href="#"><svg width="16" height="16"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9"/></svg> Telegram</a>
+          <a href="https://vk.com/seonado_target" target="_blank"><svg width="16" height="16"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> ВКонтакте</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2020-2026 Юлия. Все права защищены.</span>
+      <a href="#" class="footer-policy">Политика конфиденциальности</a>
+    </div>
+  </div>
+</footer>
+ 
+<script>
+// ── NAV SCROLL ──
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', scrollY > 50));
+ 
+// ── MOBILE MENU ──
+const ham = document.getElementById('hamburger');
+const mob = document.getElementById('mobile-nav');
+ham.addEventListener('click', () => { const o = mob.classList.toggle('open'); ham.textContent = o ? '✕' : '☰'; });
+function closeMob(){ mob.classList.remove('open'); ham.textContent = '☰'; }
+ 
+// ── CHART BARS ──
+const heights = [40,70,45,90,65,85,55,95,75,100];
+const barsEl = document.getElementById('chartBars');
+if(barsEl) {
+    heights.forEach((h, i) => {
       const d = document.createElement('div');
-      d.style.cssText = `height:${h}%;background:rgba(72,17,115,.35);border-radius:2px 2px 0 0;transition:height .8s ease ${i * 0.05}s;`;
+      d.style.cssText = `flex:1;background:rgba(72,17,115,.35);border-radius:2px 2px 0 0;height:${h}%;animation-delay:${0.5+i*0.05}s;`;
       barsEl.appendChild(d);
     });
-
-    const faqs = [
-      { q: 'Я уже пробовал таргет — не получил результат.', a: 'Чаще всего это случается из-за отсутствия стратегии: реклама запускалась без анализа аудитории, без теста гипотез и без оптимизации. Моя работа начинается именно с этого — и только потом запуск.' },
-      { q: 'Как я могу контролировать, куда уходят деньги?', a: 'Реклама работает в ВАШЕМ рекламном кабинете ВКонтакте. Вы видите все объявления, статистику переходов и стоимость каждого клика 24/7. Полная прозрачность.' },
-      { q: 'Когда будут первые результаты?', a: 'Первые данные появляются через 3–5 дней после запуска. Устойчивые результаты формируются в течение первых 2–3 недель активной работы.' },
-      { q: 'А если мой товар специфический?', a: 'За 5 лет я работала с десятками разных ниш. На первичной консультации честно скажу, подойдёт ли таргет для вашего товара.' },
-      { q: 'Вы даёте гарантию продаж?', a: 'Я гарантирую профессиональную настройку, целевой трафик и ежедневную работу с кампаниями. На количество продаж также влияют карточка товара, цена, отзывы и рейтинг.' },
-      { q: 'Сколько нужно рекламного бюджета?', a: 'Минимальный рекомендуемый бюджет — 15 000 ₽/месяц. Оптимально для старта — 20–30 000 ₽/месяц.' },
-      { q: 'Как начать работу?', a: 'Оставьте заявку → я свяжусь с вами → проведём бесплатный разбор карточки → обсудим стратегию → запускаемся.' },
-    ];
-    const faqList = document.getElementById('faqList');
+}
+ 
+// ── CASES ──
+const cases = [
+  {cat:'Товары для дома',was:'CTR 0.4%, цена клика 45 ₽',now:'CTR 2.1%, цена клика 6 ₽',extra:'8 400 переходов за месяц',bg:'linear-gradient(135deg,rgba(168,85,247,.2),rgba(203,17,171,.2))'},
+  {cat:'Детские игрушки',was:'Реклама не запущена',now:'15 200 переходов, CTR 2.8%',extra:'Цена клика 4.8 ₽',bg:'linear-gradient(135deg,rgba(59,130,246,.2),rgba(168,85,247,.2))'},
+  {cat:'Косметика',was:'Высокий CPM',now:'Снизили CPM на 40%',extra:'Цена клика: 3 ₽',bg:'linear-gradient(135deg,rgba(236,72,153,.2),rgba(203,17,171,.2))'},
+  {cat:'Женская одежда',was:'CTR 0.6%, заказы по 450 ₽',now:'CTR 3.2%, заказы по 180 ₽',extra:'ROI 580%',bg:'linear-gradient(135deg,rgba(99,102,241,.2),rgba(59,130,246,.2))'},
+  {cat:'Сумки и аксессуары',was:'Цена клика 28 ₽',now:'Цена клика 5.2 ₽, CTR 1.9%',extra:'Масштабировали бюджет в 5 раз',bg:'linear-gradient(135deg,rgba(203,17,171,.2),rgba(168,85,247,.2))'},
+  {cat:'Электроника',was:'Мало переходов',now:'12 000 переходов, CTR 1.5%',extra:'Цена клика 7.5 ₽',bg:'linear-gradient(135deg,rgba(100,116,139,.2),rgba(99,102,241,.2))'},
+  {cat:'Зоотовары',was:'CTR 0.3%',now:'CTR 2.5%, цена клика 4.2 ₽',extra:'Вышли в ТОП по запросам',bg:'linear-gradient(135deg,rgba(34,197,94,.2),rgba(20,184,166,.2))'},
+  {cat:'Спорттовары',was:'Высокая цена заказа',now:'Снизили CPO в 3 раза',extra:'CTR 2.9%',bg:'linear-gradient(135deg,rgba(249,115,22,.2),rgba(239,68,68,.2))'},
+  {cat:'Канцелярия',was:'Реклама в минус',now:'ROI 450%, цена клика 3.8 ₽',extra:'Подготовка к сезону за 2 недели',bg:'linear-gradient(135deg,rgba(234,179,8,.2),rgba(249,115,22,.2))'},
+  {cat:'Автотовары',was:'CTR 0.5%',now:'CTR 1.8%, цена клика 6.5 ₽',extra:'Стабильный поток заказов',bg:'linear-gradient(135deg,rgba(107,114,128,.2),rgba(71,85,105,.2))'},
+];
+const scroll = document.getElementById('casesScroll');
+if(scroll) {
+    cases.forEach(c => {
+      scroll.innerHTML += `<div class="glass-card case-card">
+        <div class="case-thumb" style="background:${c.bg};">
+          <svg width="48" height="48"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          <div class="case-thumb-overlay"></div>
+          <div class="case-badge">${c.cat}</div>
+        </div>
+        <div class="case-body">
+          <div class="case-row divider"><span class="lbl">Было:</span><span class="was">${c.was}</span></div>
+          <div class="case-row"><span class="lbl">Стало:</span><span class="now">${c.now}</span></div>
+          <div class="case-extra">${c.extra}</div>
+        </div>
+      </div>`;
+    });
+}
+ 
+// ── FAQ ──
+const faqs = [
+  {q:'Я уже пробовал таргет — не получил результат.',a:'Чаще всего это случается из-за отсутствия стратегии: реклама запускалась без анализа аудитории, без теста гипотез и без оптимизации. Моя работа начинается именно с этого — и только потом запуск. Мы находим то, что реально работает.'},
+  {q:'Как я могу контролировать, куда уходят деньги?',a:'Реклама работает в ВАШЕМ рекламном кабинете ВКонтакте. Вы видите все объявления, статистику переходов и стоимость каждого клика 24/7. Я ничем не управляю без вашего ведома. Полная прозрачность.'},
+  {q:'Когда будут первые результаты?',a:'Первые данные появляются через 3–5 дней после запуска. Устойчивые результаты и оптимизированные связки формируются в течение первых 2–3 недель активной работы.'},
+  {q:'А если мой товар специфический?',a:'За 5 лет я работала с десятками разных ниш. На первичной консультации я честно скажу, подойдёт ли таргет для вашего конкретного товара и какие есть риски.'},
+  {q:'Вы даёте гарантию продаж?',a:'Я гарантирую профессиональную настройку, целевой трафик и ежедневную работу с кампаниями. На количество продаж также влияют карточка товара, цена, отзывы и рейтинг — я дам рекомендации по их улучшению.'},
+  {q:'Сколько нужно рекламного бюджета?',a:'Минимальный рекомендуемый бюджет — 15 000 ₽/месяц. Это позволяет нормально протестировать гипотезы. Оптимально для старта — 20–30 000 ₽/месяц.'},
+  {q:'Как начать работу?',a:'Оставьте заявку → я свяжусь с вами → проведём бесплатный разбор вашей карточки → обсудим стратегию и условия → запускаемся.'},
+];
+const faqList = document.getElementById('faqList');
+if(faqList) {
     faqs.forEach((f, i) => {
       const item = document.createElement('div');
       item.className = 'faq-item';
       item.innerHTML = `<button class="faq-btn" onclick="toggleFaq(${i})">
         <h3>${f.q}</h3>
-        <svg class="faq-arr" id="arr${i}" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg>
+        <svg class="faq-arrow" id="arrow${i}" width="20" height="20"><polyline points="6,9 12,15 18,9"/></svg>
       </button>
-      <div class="faq-body" id="fb${i}"><p>${f.a}</p></div>`;
+      <div class="faq-body" id="body${i}"><p>${f.a}</p></div>`;
       faqList.appendChild(item);
     });
-    function toggleFaq(i) {
-      document.getElementById('fb' + i).classList.toggle('open');
-      document.getElementById('arr' + i).classList.toggle('open');
+}
+function toggleFaq(i){
+  const body = document.getElementById('body'+i);
+  const arrow = document.getElementById('arrow'+i);
+  const open = body.classList.toggle('open');
+  arrow.classList.toggle('open', open);
+}
+ 
+// ── COUNTER ──
+function animateCounter(el){
+  const target = parseFloat(el.dataset.counter);
+  const suffix = el.dataset.suffix || '';
+  const isFloat = el.dataset.float === '1';
+  const duration = 2000, fps = 60, frames = duration/1000*fps;
+  let frame = 0;
+  const t = setInterval(() => {
+    frame++;
+    const val = target * (frame/frames);
+    el.textContent = (isFloat ? val.toFixed(1) : Math.floor(val)) + suffix;
+    if(frame >= frames){ el.textContent = (isFloat ? target.toFixed(1) : target) + suffix; clearInterval(t); }
+  }, 1000/fps);
+}
+ 
+// ── INTERSECTION OBSERVER ──
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      if(e.target.dataset.counter) animateCounter(e.target);
+      io.unobserve(e.target);
     }
-
-    const io = new IntersectionObserver(e => {
-      e.forEach(el => {
-        if (el.isIntersecting) { el.target.classList.add('animate'); io.unobserve(el.target); }
-      });
-    }, { threshold: 0, rootMargin: '0px 0px -30px 0px' });
-    document.querySelectorAll('.fade,.fade-l,.fade-r').forEach(el => io.observe(el));
-  </script>
+  });
+}, {threshold:.15});
+document.querySelectorAll('.fade,.fade-left,.fade-right').forEach(el => io.observe(el));
+document.querySelectorAll('[data-counter]').forEach(el => io.observe(el));
+ 
+// ── FORM ──
+function handleSubmit(e){
+  e.preventDefault();
+  const btn = e.target.closest('button');
+  btn.textContent = '✔ Отправлено!';
+  btn.style.background = 'var(--success)';
+  setTimeout(() => { btn.innerHTML = 'Написать Юлии <svg width="20" height="20"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9"/></svg>'; btn.style.background=''; }, 3000);
+}
+</script>
 </body>
 </html>
